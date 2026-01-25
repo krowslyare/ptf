@@ -1,0 +1,56 @@
+"use client";
+
+import React from "react";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+
+export function TracingBeam({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [svgHeight, setSvgHeight] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+
+  const y1 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, svgHeight]),
+    { stiffness: 300, damping: 50 }
+  );
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (contentRef.current) {
+        setSvgHeight(contentRef.current.offsetHeight);
+      }
+    };
+    
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
+
+  return (
+    <motion.div ref={ref} className="relative w-full">
+      {/* Subtle vertical line on the left */}
+      <div className="absolute left-4 md:left-6 top-0 bottom-0 hidden md:block">
+        {/* Background line - very subtle */}
+        <div 
+          className="absolute left-0 top-0 w-px bg-border/30"
+          style={{ height: svgHeight }}
+        />
+        
+        {/* Progress indicator - small dot */}
+        <motion.div
+          className="absolute left-[-2px] w-[5px] h-[5px] rounded-full bg-foreground/40"
+          style={{ top: y1 }}
+        />
+      </div>
+
+      <div ref={contentRef} className="relative md:pl-12">
+        {children}
+      </div>
+    </motion.div>
+  );
+}
