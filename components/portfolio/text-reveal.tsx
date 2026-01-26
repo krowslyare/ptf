@@ -13,7 +13,7 @@ export function TextReveal({ text, className = "", as: Tag = "p" }: TextRevealPr
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.9", "end 0.5"],
+    offset: ["start 0.95", "end 0.7"],
   });
 
   // Suavizar el progreso del scroll para una animación más fluida
@@ -70,7 +70,7 @@ export function CharReveal({ text, className = "" }: CharRevealProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.9", "end 0.5"],
+    offset: ["start 0.95", "end 0.7"],
   });
 
   // Suavizar el progreso del scroll
@@ -125,7 +125,7 @@ export function ParagraphReveal({ text, className = "" }: ParagraphRevealProps) 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.98", "end 0.35"],
+    offset: ["start 0.9", "end 0.6"],
   });
 
   const words = text.split(" ");

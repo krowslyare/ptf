@@ -231,17 +231,40 @@ export function About() {
           {/* Content */}
           <div className="md:col-span-9 space-y-16">
             {/* Bio */}
-            <div>
-              <TextReveal
-                text="Ingeniero en Informática de la Pontificia Universidad Católica del Perú (PUCP), con experiencia en procesos ETL, análisis de datos financieros y desarrollo de microservicios cloud."
-                className="text-xl md:text-2xl leading-relaxed font-light text-foreground/90"
+            <div className="space-y-6">
+              <ParagraphReveal
+                text="Me gusta construir cosas: software, datos, interfaces, websites y servicios que corren en la nube, tanto en proyectos profesionales como personales."
+                className="text-lg text-muted-foreground leading-relaxed"
               />
-              <div className="mt-6">
-                <ParagraphReveal
-                  text="Perfil analítico, adaptable y orientado a resultados. Me especializo en diseñar e implementar soluciones de datos que transforman información en valor de negocio."
-                  className="text-lg text-muted-foreground leading-relaxed"
+              <ParagraphReveal
+                text="He trabajado entre backend, frontend, datos e infraestructura, adaptándome a lo que cada proyecto necesita. En paralelo, suelo experimentar y aprender montando servidores y servicios por hobby, lo que me ha dado bastante criterio práctico sobre cómo funcionan las cosas en producción."
+                className="text-lg text-muted-foreground leading-relaxed"
+              />
+              <ParagraphReveal
+                text="No me identifico mucho con la dinámica de comparación constante de redes profesionales. Prefiero enfocarme en aprender, mejorar y colaborar, sin convertir el trabajo en una vitrina."
+                className="text-lg text-muted-foreground leading-relaxed"
+              />
+
+              <motion.a 
+                href="https://www.pucp.edu.pe/"
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="flex items-center gap-6 pt-8 border-t border-border/50 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer"
+              >
+                <img 
+                  src="/pucp.png" 
+                  alt="PUCP" 
+                  className="h-20 w-auto dark:invert-0 invert"
                 />
-              </div>
+                <div className="text-xs md:text-sm tracking-widest uppercase font-mono">
+                  <p className="text-foreground font-medium">Pontificia Universidad Católica del Perú</p>
+                  <p className="text-muted-foreground mt-1">Ingeniería Informática</p>
+                </div>
+              </motion.a>
             </div>
 
             {/* Skills */}

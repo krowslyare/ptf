@@ -5,9 +5,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { TextReveal } from "./text-reveal";
 
 const contactInfo = {
-  email: "hideki.toyama@pucp.edu.pe",
+  email: "krowslyare00@gmail.com",
   phone: "+51 982 104 435",
-  location: "Ate, Mayorazgo, Lima, Perú",
 };
 
 function ContactItem({ 
@@ -114,13 +113,6 @@ export function Contact() {
                 href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
                 progress={scrollYProgress}
                 index={1}
-              />
-
-              <ContactItem
-                label="Ubicación"
-                value={contactInfo.location}
-                progress={scrollYProgress}
-                index={2}
               />
             </div>
 
