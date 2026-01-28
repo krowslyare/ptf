@@ -61,7 +61,7 @@ function TypewriterText({
 }
 
 // Glitch text effect - occasional distortion
-function GlitchText({ children, className = "" }: { children: string; className?: string }) {
+function GlitchText({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const [isGlitching, setIsGlitching] = useState(false);
   const [glitchOffset, setGlitchOffset] = useState({ x: 0, y: 0 });
 

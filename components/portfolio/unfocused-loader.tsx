@@ -1,10 +1,11 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence, useMotionValue, useTransform, animate } from "framer-motion";
 
 export function UnfocusedLoader() {
   const [isLoading, setIsLoading] = useState(true);
+  const blurValue = useMotionValue(40);
 
   useEffect(() => {
     // Small delay to ensure the effect is visible
@@ -12,8 +13,19 @@ export function UnfocusedLoader() {
       setIsLoading(false);
     }, 1800);
 
-    return () => clearTimeout(timer);
-  }, []);
+    const controls = animate(blurValue, 0, {
+      duration: 1.6,
+      ease: [0.16, 1, 0.3, 1],
+      delay: 0.2,
+    });
+
+    return () => {
+      clearTimeout(timer);
+      controls.stop();
+    };
+  }, [blurValue]);
+
+  const backdropFilter = useTransform(blurValue, (v) => `blur(${v}px)`);
 
   return (
     <AnimatePresence>
@@ -29,22 +41,11 @@ export function UnfocusedLoader() {
         >
           {/* Blur overlay layers - simulating lens unfocus */}
           <motion.div
-            initial={{ 
-              backdropFilter: "blur(40px)",
-              WebkitBackdropFilter: "blur(40px)",
-            }}
-            animate={{ 
-              backdropFilter: "blur(0px)",
-              WebkitBackdropFilter: "blur(0px)",
-            }}
-            transition={{ 
-              duration: 1.6, 
-              ease: [0.16, 1, 0.3, 1],
-              delay: 0.2 
-            }}
             className="absolute inset-0"
             style={{
               background: "inherit",
+              backdropFilter: backdropFilter,
+              WebkitBackdropFilter: backdropFilter,
             }}
           />
 

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { TextReveal, ParagraphReveal } from "./text-reveal";
@@ -203,7 +204,7 @@ interface CertificationCardProps {
   index: number;
 }
 
-function CertificationCard({ cert, progress, range, index }: CertificationCardProps) {
+function CertificationCard({ cert, progress, range }: CertificationCardProps) {
   const opacity = useTransform(progress, range, [0, 1]);
   const y = useTransform(progress, range, [20, 0]);
   const scale = useTransform(progress, range, [0.98, 1]);
@@ -296,9 +297,11 @@ export function About() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="flex items-center gap-3 sm:gap-4 md:gap-6 pt-6 sm:pt-8 border-t border-border/50 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer"
               >
-                <img 
+                <Image
                   src="/pucp.png" 
                   alt="PUCP" 
+                  width={80}
+                  height={80}
                   className="h-10 sm:h-14 md:h-20 w-auto dark:invert-0 invert shrink-0"
                 />
                 <div className="text-[9px] sm:text-xs md:text-sm tracking-wide sm:tracking-widest uppercase font-mono min-w-0">

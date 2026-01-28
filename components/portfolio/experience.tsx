@@ -93,14 +93,20 @@ const experienceSections = [
   },
 ];
 
-type Experience = typeof experienceSections[number]["experiences"][number];
+type Experience = (typeof experienceSections)[number]["experiences"][number] & {
+  showcase?: {
+    name: string;
+    href: string;
+    logo: string;
+  }[];
+};
 
 interface ExperienceCardProps {
   exp: Experience;
   index: number;
 }
 
-function ExperienceCard({ exp, index }: ExperienceCardProps) {
+function ExperienceCard({ exp }: ExperienceCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -123,7 +129,7 @@ function ExperienceCard({ exp, index }: ExperienceCardProps) {
             className="font-serif text-2xl"
             as="h3"
           />
-          {exp.subtitle && (
+          {'subtitle' in exp && exp.subtitle && (
             <p className="text-muted-foreground">{exp.subtitle}</p>
           )}
           <p className="text-sm text-muted-foreground mt-1">
@@ -146,14 +152,12 @@ function ExperienceCard({ exp, index }: ExperienceCardProps) {
           />
         ))}
 
-        {/* @ts-ignore */}
         {exp.showcase && (
           <div className="pt-4">
             <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/50 mb-3 ml-0.5">
               Algunos ejemplos
             </p>
             <div className="flex flex-wrap gap-3">
-              {/* @ts-ignore */}
               {exp.showcase.map((project) => (
                 <a
                   key={project.name}
@@ -163,7 +167,6 @@ function ExperienceCard({ exp, index }: ExperienceCardProps) {
                   className="group relative w-24 h-14 flex items-center justify-center rounded bg-secondary/10 hover:bg-secondary/20 border border-white/5 hover:border-white/10 transition-all duration-300"
                   title={`Visitar ${project.name}`}
                 >
-                  {/* @ts-ignore */}
                   <img 
                     src={project.logo} 
                     alt={project.name} 
@@ -179,8 +182,14 @@ function ExperienceCard({ exp, index }: ExperienceCardProps) {
   );
 }
 
+interface Role {
+  title: string;
+  level?: string;
+  tasks: string[];
+}
+
 interface RoleItemProps {
-  role: Experience["roles"][number];
+  role: Role;
   parentProgress: ReturnType<typeof useScroll>["scrollYProgress"];
   index: number;
 }

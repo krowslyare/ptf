@@ -5,15 +5,18 @@ import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from 'next-themes'
 import './globals.css'
 
-const _ibmPlexSans = IBM_Plex_Sans({ 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const ibmPlexSans = IBM_Plex_Sans({ 
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"]
 });
-const _ibmPlexMono = IBM_Plex_Mono({ 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const ibmPlexMono = IBM_Plex_Mono({ 
   subsets: ["latin"],
   weight: ["400", "500"]
 });
-const _playfairDisplay = Playfair_Display({ 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const playfairDisplay = Playfair_Display({ 
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"]
 });
