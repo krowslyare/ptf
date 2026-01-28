@@ -170,9 +170,9 @@ function StatusLine() {
   }, []);
 
   return (
-    <div className="font-mono text-[10px] tracking-widest text-muted-foreground/60 flex items-center gap-4">
-      <span>SYS.ACTIVE</span>
-      <span className="w-px h-3 bg-muted-foreground/30" />
+    <div className="font-mono text-[10px] tracking-widest text-muted-foreground/60 flex items-center gap-2 sm:gap-4 flex-wrap">
+      <span className="hidden sm:inline">SYS.ACTIVE</span>
+      <span className="hidden sm:inline w-px h-3 bg-muted-foreground/30" />
       <span>{time}</span>
       <span className="w-px h-3 bg-muted-foreground/30" />
       <span>LIMA, PE</span>
@@ -275,16 +275,16 @@ export function Hero() {
         </div>
 
         {/* Role subtitle */}
-        <div className="mb-8 h-8">
+        <div className="mb-6 sm:mb-8 min-h-[32px]">
           {showSubtitle && (
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex items-center gap-3"
+              className="flex items-center gap-2 sm:gap-3"
             >
-              <span className="w-12 h-px bg-foreground" />
-              <span className="font-mono text-sm tracking-[0.2em] text-muted-foreground uppercase">
+              <span className="w-6 sm:w-12 h-px bg-foreground shrink-0" />
+              <span className="font-mono text-[10px] sm:text-xs md:text-sm tracking-[0.15em] sm:tracking-[0.2em] text-muted-foreground uppercase">
                 <TypewriterText 
                   text="Data Engineer & Software Developer" 
                   speed={30}
@@ -296,16 +296,17 @@ export function Hero() {
         </div>
 
         {/* Description */}
-        <div className="mb-12 min-h-[80px]">
+        <div className="mb-8 sm:mb-12 min-h-[60px] sm:min-h-[80px]">
           {showDescription && (
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8 }}
-              className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed font-light"
+              className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed font-light"
             >
               Construyo pipelines de datos y sistemas escalables.
-              <br />
+              <span className="hidden sm:inline"><br /></span>
+              <span className="sm:hidden"> </span>
               Especializado en Azure, Databricks y arquitecturas cloud.
             </motion.p>
           )}
@@ -318,17 +319,17 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap gap-3 sm:gap-4"
             >
               <a
                 href="#projects"
-                className="group relative px-6 py-3 bg-foreground text-background font-mono text-xs tracking-widest uppercase overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
+                className="group relative px-4 sm:px-6 py-2.5 sm:py-3 bg-foreground text-background font-mono text-[10px] sm:text-xs tracking-widest uppercase overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
               >
                 <span className="relative z-10">Ver proyectos</span>
               </a>
               <a
                 href="#contact"
-                className="group px-6 py-3 border border-foreground/30 text-foreground font-mono text-xs tracking-widest uppercase hover:border-foreground transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="group px-4 sm:px-6 py-2.5 sm:py-3 border border-foreground/30 text-foreground font-mono text-[10px] sm:text-xs tracking-widest uppercase hover:border-foreground transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 Contactar
               </a>
@@ -341,7 +342,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: showCTA ? 1 : 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="absolute bottom-[-120px] left-0"
+          className="absolute bottom-[-80px] sm:bottom-[-120px] left-0 hidden sm:block"
         >
           <div className="flex items-center gap-3">
             <motion.div 
@@ -358,7 +359,7 @@ export function Hero() {
 
       {/* Version mark */}
       <motion.div 
-        className="absolute bottom-8 right-8 font-mono text-[10px] tracking-widest text-muted-foreground/40"
+        className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 font-mono text-[10px] tracking-widest text-muted-foreground/40"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 3, duration: 1 }}

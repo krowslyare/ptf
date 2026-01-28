@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ParagraphReveal } from "./text-reveal";
 
 const projects = [
@@ -48,18 +48,28 @@ function ProjectCard({ project, index }: ProjectCardProps) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.9", "start 0.35"],
+    offset: ["start 0.95", "start 0.25"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
-  const y = useTransform(scrollYProgress, [0, 0.3], [60, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.3], [0.97, 1]);
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 80,
+    damping: 25,
+    restDelta: 0.001,
+  });
+
+  const opacity = useTransform(smoothProgress, [0, 0.5], [0, 1]);
+  const y = useTransform(smoothProgress, [0, 0.5], [50, 0]);
+  const scale = useTransform(smoothProgress, [0, 0.5], [0.96, 1]);
 
   return (
     <motion.article
       ref={ref}
       style={{ opacity, y, scale }}
-      className="group p-6 md:p-8 border border-border hover:border-foreground transition-colors duration-300"
+      className="group p-6 md:p-8 border border-border hover:border-foreground hover:bg-foreground/[0.02] transition-all duration-300 ease-out"
+      whileHover={{ 
+        y: -2,
+        transition: { duration: 0.25, ease: "easeOut" }
+      }}
     >
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
         <div>
@@ -91,16 +101,22 @@ interface TechTagsProps {
 }
 
 function TechTags({ technologies, parentProgress }: TechTagsProps) {
+  const smoothProgress = useSpring(parentProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   return (
     <div className="flex flex-wrap gap-2">
       {technologies.map((tech, i) => {
-        const start = 0.4 + i * 0.08;
+        const start = 0.3 + i * 0.06;
         return (
           <TechTag 
             key={tech} 
             tech={tech} 
-            progress={parentProgress}
-            range={[start, start + 0.2]}
+            progress={smoothProgress}
+            range={[start, start + 0.25]}
           />
         );
       })}
@@ -110,18 +126,20 @@ function TechTags({ technologies, parentProgress }: TechTagsProps) {
 
 interface TechTagProps {
   tech: string;
-  progress: ReturnType<typeof useScroll>["scrollYProgress"];
+  progress: ReturnType<typeof useSpring>;
   range: [number, number];
 }
 
 function TechTag({ tech, progress, range }: TechTagProps) {
   const opacity = useTransform(progress, range, [0, 1]);
-  const x = useTransform(progress, range, [-10, 0]);
+  const y = useTransform(progress, range, [8, 0]);
+  const scale = useTransform(progress, range, [0.9, 1]);
 
   return (
     <motion.span
-      style={{ opacity, x }}
-      className="px-2 py-1 text-xs font-mono border border-border text-muted-foreground"
+      style={{ opacity, y, scale }}
+      className="px-2 py-1 text-xs font-mono border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors duration-200"
+      whileHover={{ scale: 1.05 }}
     >
       {tech}
     </motion.span>

@@ -5,7 +5,7 @@ export function Footer() {
     <footer className="py-8 px-6 border-t border-border">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm text-muted-foreground font-mono">
-          © {currentYear} Hideki Toyama
+          © {currentYear} Hideki Toyama - H.T.
         </p>
 
         <div className="flex items-center gap-6">
