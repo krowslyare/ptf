@@ -300,8 +300,8 @@ export function About() {
                 <Image
                   src="/pucp.png" 
                   alt="PUCP" 
-                  width={80}
-                  height={80}
+                  width={240}
+                  height={240}
                   className="h-10 sm:h-14 md:h-20 w-auto dark:invert-0 invert shrink-0"
                 />
                 <div className="text-[9px] sm:text-xs md:text-sm tracking-wide sm:tracking-widest uppercase font-mono min-w-0">
