@@ -48,8 +48,7 @@ const skills = {
   ],
   workflow: [
     "Automation & Scripting",
-    "CLI-first Development",
-    "AI-assisted Development"
+    "CLI-first Development"
   ]
 };
 
@@ -140,7 +139,7 @@ interface SkillRowProps {
 }
 
 function SkillRow({ name, items, parentProgress, index, isLast }: SkillRowProps) {
-  const start = index * 0.12;
+  const start = isLast ? 0 : index * 0.12;
   const opacity = useTransform(
     parentProgress,
     [start, start + 0.25],
@@ -155,7 +154,7 @@ function SkillRow({ name, items, parentProgress, index, isLast }: SkillRowProps)
   return (
     <motion.div 
       style={{ opacity, y }}
-      className={`group grid grid-cols-1 sm:grid-cols-[80px_1fr] md:grid-cols-[100px_1fr] gap-1 sm:gap-4 md:gap-8 items-baseline py-3 sm:py-4 ${!isLast ? 'border-b border-border/50' : ''}`}
+      className={`group grid grid-cols-1 sm:grid-cols-[80px_1fr] md:grid-cols-[100px_1fr] gap-1 sm:gap-4 md:gap-8 items-baseline py-3 sm:py-4 border-b border-border/50`}
     >
       <span className="text-[10px] sm:text-xs font-mono tracking-wide sm:tracking-widest text-muted-foreground uppercase shrink-0">
         {name}
@@ -167,7 +166,7 @@ function SkillRow({ name, items, parentProgress, index, isLast }: SkillRowProps)
               {skill}
             </span>
             {i < items.length - 1 && (
-              <span className="text-muted-foreground/40 mx-1 sm:mx-2">/</span>
+              <span className="text-muted-foreground/40 mx-1 sm:mx-2">·</span>
             )}
           </span>
         ))}
@@ -278,21 +277,21 @@ export function About() {
   const labelOpacity = useTransform(labelProgress, [0, 1], [0, 1]);
 
   return (
-    <section id="about" className="py-16 sm:py-24 md:py-32 px-10 sm:px-14 md:px-6 border-t border-border overflow-hidden">
+    <section id="about" className="py-16 sm:py-24 md:py-32 px-10 sm:px-14 md:px-6 border-t border-border">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-12 md:gap-16">
+        <div className="grid md:grid-cols-12 gap-12 md:gap-16">
           {/* Label */}
-          <div className="col-span-1 md:col-span-3" ref={labelRef}>
+          <div className="md:col-span-3" ref={labelRef}>
             <motion.p
               style={{ opacity: labelOpacity }}
-              className="text-sm font-mono tracking-widest text-muted-foreground uppercase md:sticky md:top-24"
+              className="text-sm font-mono tracking-widest text-muted-foreground uppercase sticky top-24"
             >
               About
             </motion.p>
           </div>
 
           {/* Content */}
-          <div className="col-span-1 md:col-span-9 space-y-10 sm:space-y-12 md:space-y-16">
+          <div className="md:col-span-9 space-y-10 sm:space-y-12 md:space-y-16">
             {/* Bio */}
             <div className="space-y-4 sm:space-y-6">
               <ParagraphReveal
@@ -304,7 +303,7 @@ export function About() {
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
               <ParagraphReveal
-                text="I don't really vibe with the constant comparison culture of professional networks. I'd rather focus on learning, improving, and collaborating—without turning work into a showcase."
+                text="I prefer building and shipping over talking about work."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
 

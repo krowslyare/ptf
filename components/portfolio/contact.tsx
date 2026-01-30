@@ -14,7 +14,7 @@ export function Contact() {
   });
 
   const handleCopy = () => {
-    navigator.clipboard.writeText("krowslyare00@gmail.com");
+    navigator.clipboard.writeText("htoyama.dev@gmail.com");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };

@@ -225,7 +225,6 @@ export function Hero() {
 
   const handleSubtitleComplete = useCallback(() => {
     setShowDescription(true);
-    setTimeout(() => setShowCTA(true), 800);
   }, []);
 
   return (
@@ -286,7 +285,7 @@ export function Hero() {
               <span className="w-6 sm:w-12 h-px bg-foreground shrink-0" />
               <span className="font-mono text-[10px] sm:text-xs md:text-sm tracking-[0.15em] sm:tracking-[0.2em] text-muted-foreground uppercase">
                 <TypewriterText 
-                  text="Data Engineer & Software Developer" 
+                  text="Cloud & Data Engineer" 
                   speed={30}
                   onComplete={handleSubtitleComplete}
                 />
@@ -298,17 +297,24 @@ export function Hero() {
         {/* Description */}
         <div className="mb-8 sm:mb-12 min-h-[60px] sm:min-h-[80px]">
           {showDescription && (
-            <motion.p
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.3 }}
               className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed font-light"
             >
-              I build data pipelines and scalable systems.
-              <span className="hidden sm:inline"><br /></span>
-              <span className="sm:hidden"> </span>
-              Specialized in Azure, Databricks, and cloud architectures.
-            </motion.p>
+              <TypewriterText 
+                text="I build cloud infrastructure, data pipelines, and scalable systems." 
+                speed={20}
+              />
+              <br />
+              <TypewriterText 
+                text="Specialized in Azure, Databricks, and cloud architectures." 
+                delay={1400}
+                speed={20}
+                onComplete={() => setShowCTA(true)}
+              />
+            </motion.div>
           )}
         </div>
 

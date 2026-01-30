@@ -41,16 +41,23 @@ const experienceSections = [
         showcase: [
           {
             name: "SMVA",
+            href: "https://test-smva.netlify.app",
             logo: "/smva.png",
+          },
+          {
+            name: "Noxon",
+            href: "https://noxon.lat",
+            logo: "/noxon.png",
           },
         ],
         roles: [
           {
             title: "Web Developer",
             tasks: [
-              "Design and development of fully responsive landing pages focused on conversion and user experience.",
-              "Full lifecycle web management: from domain and hosting setup to deployment and optimization.",
-              "Integration of contact services and notifications to facilitate client interaction.",
+              "Design and development of responsive landing pages focused on conversion and user experience.",
+              "End-to-end project ownership: domain setup, hosting configuration, deployment, and performance optimization.",
+              "Management of cloud/hosting environments, DNS configuration, and service integrations.",
+              "Implementation of contact systems, notifications, and ongoing maintenance.",
             ],
           },
         ],
@@ -151,7 +158,7 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
           />
         ))}
 
-        {/* {exp.showcase && (
+        {exp.showcase && (
           <div className="pt-4">
             <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/50 mb-3 ml-0.5">
               Some examples
@@ -175,7 +182,7 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
               ))}
             </div>
           </div>
-        )} */}
+        )}
       </div>
     </motion.div>
   );
