@@ -6,33 +6,51 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { TextReveal, ParagraphReveal } from "./text-reveal";
 
 const skills = {
-  technical: [
-    "SQL",
-    "NoSQL",
+  languages: [
     "Python",
-    "PySpark",
+    "SQL",
     "Java",
-    "ETL",
-    "Modelado de Datos",
-    "APIs REST",
-    "Spring Boot",
+    "PySpark"
   ],
-  platforms: ["Databricks", "Microsoft Fabric", "Azure", "Google Cloud"],
-  tools: [
-    "Git & GitHub",
-    "Apache Airflow",
+  cloud: [
+    "Microsoft Azure",
+    "Google Cloud Platform",
+    "Cloud Infrastructure (IaaS)"
+  ],
+  dataEngineering: [
+    "ETL / Data Pipelines",
+    "Data Modeling",
+    "Data Warehousing",
+    "Batch Processing"
+  ],
+  platforms: [
+    "Databricks",
+    "Microsoft Fabric"
+  ],
+  backend: [
+    "REST APIs",
+    "Microservices",
+    "Spring Boot"
+  ],
+  infrastructure: [
+    "Linux Server Administration",
+    "Virtual Machines Provisioning & Management",
+    "Self-hosted Deployments",
+    "Networking Fundamentals (SSH, DNS, HTTP, TLS)"
+  ],
+  devTools: [
+    "Git",
+    "Docker",
+    "Airflow",
     "dbt",
-    "Alteryx",
     "Power BI",
-    "Jupyter",
+    "Jupyter"
   ],
-  ai: [
-    "AI Dev Tools",
-    "LLM Tooling",
-    "AI Agents",
-    "Prompt Engineering",
-  ],
-  languages: ["Inglés (Avanzado)", "Portugués (Básico)", "Japonés (Básico)"],
+  workflow: [
+    "Automation & Scripting",
+    "CLI-first Development",
+    "AI-assisted Development"
+  ]
 };
 
 const certifications = [
@@ -77,11 +95,14 @@ function SkillsSection() {
   });
 
   const categoryNames: Record<string, string> = {
-    technical: "Core",
-    platforms: "Cloud",
-    tools: "DevOps",
-    ai: "AI",
-    languages: "Idiomas",
+    languages: "Languages",
+    cloud: "Cloud",
+    dataEngineering: "Data",
+    platforms: "Platforms",
+    backend: "Backend",
+    infrastructure: "Infra",
+    devTools: "Tools",
+    workflow: "Workflow",
   };
 
   const entries = Object.entries(skills);
@@ -89,7 +110,7 @@ function SkillsSection() {
   return (
     <div ref={ref} className="space-y-8">
       <TextReveal 
-        text="Habilidades" 
+        text="Skills" 
         className="font-serif text-2xl"
         as="h3"
       />
@@ -171,7 +192,7 @@ function CertificationsSection() {
   return (
     <div ref={ref} className="space-y-6">
       <TextReveal 
-        text="Certificaciones" 
+        text="Certifications" 
         className="font-serif text-2xl"
         as="h3"
       />
@@ -266,7 +287,7 @@ export function About() {
               style={{ opacity: labelOpacity }}
               className="text-sm font-mono tracking-widest text-muted-foreground uppercase md:sticky md:top-24"
             >
-              Sobre mí
+              About
             </motion.p>
           </div>
 
@@ -275,15 +296,15 @@ export function About() {
             {/* Bio */}
             <div className="space-y-4 sm:space-y-6">
               <ParagraphReveal
-                text="Me gusta construir cosas: software, datos, interfaces, websites y servicios que corren en la nube, tanto en proyectos profesionales como personales."
+                text="I like building things: software, data pipelines, interfaces, websites, and cloud services—both for work and personal projects."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
               <ParagraphReveal
-                text="He trabajado entre backend, frontend, datos e infraestructura, adaptándome a lo que cada proyecto necesita. En paralelo, suelo experimentar y aprender montando servidores y servicios por hobby, lo que me ha dado bastante criterio práctico sobre cómo funcionan las cosas en producción."
+                text="I've worked across backend, frontend, data, and infrastructure—adapting to whatever each project needs. On the side, I experiment and learn by self-hosting servers and services, which has given me solid hands-on understanding of how things actually work in production."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
               <ParagraphReveal
-                text="No me identifico mucho con la dinámica de comparación constante de redes profesionales. Prefiero enfocarme en aprender, mejorar y colaborar, sin convertir el trabajo en una vitrina."
+                text="I don't really vibe with the constant comparison culture of professional networks. I'd rather focus on learning, improving, and collaborating—without turning work into a showcase."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
 
@@ -306,7 +327,7 @@ export function About() {
                 />
                 <div className="text-[9px] sm:text-xs md:text-sm tracking-wide sm:tracking-widest uppercase font-mono min-w-0">
                   <p className="text-foreground font-medium break-words">Pontificia Universidad Católica del Perú</p>
-                  <p className="text-muted-foreground mt-1">Ingeniería Informática</p>
+                  <p className="text-muted-foreground mt-1">Computer Science</p>
                 </div>
               </motion.a>
             </div>

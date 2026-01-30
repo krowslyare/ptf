@@ -43,7 +43,7 @@ export function Contact() {
               style={{ opacity: labelOpacity }}
               className="text-sm font-mono tracking-widest text-background/50 uppercase sticky top-24"
             >
-              Contacto
+              Contact
             </motion.p>
           </div>
 
@@ -51,7 +51,7 @@ export function Contact() {
           <div className="md:col-span-9">
             <div className="mb-12">
               <TextReveal
-                text="¿Tienes un proyecto en mente o una oportunidad laboral? Hablemos."
+                text="Have a project in mind or a job opportunity? Let's talk."
                 className="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight"
                 as="h2"
               />
@@ -69,11 +69,11 @@ export function Contact() {
                 className="group inline-flex items-center gap-3 px-6 py-3 bg-secondary/20 hover:bg-secondary/40 text-foreground transition-colors"
               >
                 <svg
-                  viewBox="0 0 24 24"
+                  viewBox="0 0 32 32"
                   fill="currentColor"
                   className="w-5 h-5"
                 >
-                  <path d="M12.031 6.172c-5.621 0-10.187 4.566-10.187 10.187 0 1.953.547 3.797 1.484 5.39l-1.328 4.25 4.453-1.297c1.516.828 3.25 1.281 5.094 1.281 5.621 0 10.187-4.566 10.187-10.187 0-5.621-4.566-10.187-10.187-10.187zm0 18.438c-1.688 0-3.266-.453-4.641-1.234l-3.078.906.922-2.922c-.938-1.5-1.453-3.234-1.453-5.063 0-4.641 3.766-8.406 8.406-8.406 4.641 0 8.406 3.766 8.406 8.406 0 4.641-3.766 8.406-8.406 8.406zm4.781-6.172c-.25-.125-1.484-.734-1.719-.813-.234-.078-.406-.125-.578.125-.172.25-.672.813-.813.984-.156.172-.313.188-.563.063-2.625-1.312-3.828-3.094-4.531-4.328-.188-.313 0-.484.141-.625.109-.109.25-.281.375-.422.125-.141.172-.234.25-.391.078-.156.047-.297-.016-.422-.063-.125-.594-1.422-.813-1.953-.219-.516-.438-.453-.609-.453h-.516c-.172 0-.469.063-.719.344-.25.281-.969.938-.969 2.297s.984 2.672 1.125 2.859c.141.188 1.953 2.984 4.719 4.187 2.125.922 2.953.906 3.969.813.984-.094 2.109-.859 2.406-1.688.297-.828.313-2.109.125-3.031-.188-.922-.438-1.047-.688-1.172z"/>
+                  <path d="M26.576 5.363c-2.69-2.69-6.406-4.354-10.511-4.354-8.209 0-14.865 6.655-14.865 14.865 0 2.732 0.737 5.291 2.022 7.491l-0.038-0.070-2.109 7.702 7.879-2.067c2.051 1.139 4.498 1.809 7.102 1.809h0.006c8.209-0.003 14.862-6.659 14.862-14.868 0-4.103-1.662-7.817-4.349-10.507l0 0zM16.062 28.228h-0.005c-0 0-0.001 0-0.001 0-2.319 0-4.489-0.64-6.342-1.753l0.056 0.031-0.451-0.267-4.675 1.227 1.247-4.559-0.294-0.467c-1.185-1.862-1.889-4.131-1.889-6.565 0-6.822 5.531-12.353 12.353-12.353s12.353 5.531 12.353 12.353c0 6.822-5.53 12.353-12.353 12.353h-0zM22.838 18.977c-0.371-0.186-2.197-1.083-2.537-1.208-0.341-0.124-0.589-0.185-0.837 0.187-0.246 0.371-0.958 1.207-1.175 1.455-0.216 0.249-0.434 0.279-0.805 0.094-1.15-0.466-2.138-1.087-2.997-1.852l0.010 0.009c-0.799-0.74-1.484-1.587-2.037-2.521l-0.028-0.052c-0.216-0.371-0.023-0.572 0.162-0.757 0.167-0.166 0.372-0.434 0.557-0.65 0.146-0.179 0.271-0.384 0.366-0.604l0.006-0.017c0.043-0.087 0.068-0.188 0.068-0.296 0-0.131-0.037-0.253-0.101-0.357l0.002 0.003c-0.094-0.186-0.836-2.014-1.145-2.758-0.302-0.724-0.609-0.625-0.836-0.637-0.216-0.010-0.464-0.012-0.712-0.012-0.395 0.010-0.746 0.188-0.988 0.463l-0.001 0.002c-0.802 0.761-1.3 1.834-1.3 3.023 0 0.026 0 0.053 0.001 0.079l-0-0.004c0.131 1.467 0.681 2.784 1.527 3.857l-0.012-0.015c1.604 2.379 3.742 4.282 6.251 5.564l0.094 0.043c0.548 0.248 1.25 0.513 1.968 0.74l0.149 0.041c0.442 0.14 0.951 0.221 1.479 0.221 0.303 0 0.601-0.027 0.889-0.078l-0.031 0.004c1.069-0.223 1.956-0.868 2.497-1.749l0.009-0.017c0.165-0.366 0.261-0.793 0.261-1.242 0-0.185-0.016-0.366-0.047-0.542l0.003 0.019c-0.092-0.155-0.34-0.247-0.712-0.434z"/>
                 </svg>
                 <span className="font-mono text-sm tracking-wide">
                   WhatsApp
@@ -83,18 +83,23 @@ export function Contact() {
               <button
                 onClick={() => setShowModal(true)}
                 className="group inline-flex items-center gap-3 px-6 py-3 bg-secondary/20 hover:bg-secondary/40 text-foreground transition-colors"
-                aria-label="Contactar por correo"
+                aria-label="Contact by email"
               >
                 <svg
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                  viewBox="0 -2.5 20 20"
+                  fill="currentColor"
                   className="w-5 h-5"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  <g id="Page-1" stroke="none" strokeWidth="1" fillRule="evenodd">
+                    <g id="Dribbble-Light-Preview" transform="translate(-300.000000, -922.000000)" fill="currentColor">
+                      <g id="icons" transform="translate(56.000000, 160.000000)">
+                        <path d="M262,764.291 L254,771.318 L246,764.281 L246,764 L262,764 L262,764.291 Z M246,775 L246,766.945 L254,773.98 L262,766.953 L262,775 L246,775 Z M244,777 L264,777 L264,762 L244,762 L244,777 Z" id="email-[#1573]"></path>
+                      </g>
+                    </g>
+                  </g>
                 </svg>
                 <span className="font-mono text-sm tracking-wide">
-                  Correo
+                  Email
                 </span>
               </button>
             </motion.div>
@@ -130,18 +135,18 @@ export function Contact() {
               
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-xl font-serif text-foreground mb-2">Contacto</h3>
-                  <p className="text-sm text-muted-foreground">Copia mi dirección o envíame un correo directamente.</p>
+                  <h3 className="text-xl font-serif text-foreground mb-2">Contact</h3>
+                  <p className="text-sm text-muted-foreground">Copy my address or send me an email directly.</p>
                 </div>
                 
                 <div className="flex items-center gap-2 p-3 bg-white/5 rounded border border-white/10">
                   <code className="flex-1 font-mono text-sm text-foreground/80">
-                    krowslyare00@gmail.com
+                    htoyama.dev@gmail.com
                   </code>
                   <button
                     onClick={handleCopy}
                     className="p-2 hover:bg-white/5 rounded transition-colors text-muted-foreground hover:text-foreground relative"
-                    title="Copiar correo"
+                    title="Copy email"
                   >
                     {copied ? (
                       <span className="text-emerald-500">
@@ -158,12 +163,12 @@ export function Contact() {
                   </button>
                 </div>
 
-                <a
-                  href="mailto:krowslyare00@gmail.com"
+                <button
+                  onClick={() => window.open('https://mail.google.com/mail/u/0/?fs=1&tf=cm&to=htoyama.dev@gmail.com', 'gmail', 'width=800,height=600,left=200,top=200')}
                   className="block w-full text-center py-3 bg-foreground text-background font-sans text-sm tracking-wide hover:bg-foreground/90 transition-colors"
                 >
-                  Abrir cliente de correo
-                </a>
+                  Open Gmail
+                </button>
               </div>
             </motion.div>
           </div>

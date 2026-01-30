@@ -304,10 +304,10 @@ export function Hero() {
               transition={{ duration: 0.8 }}
               className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed font-light"
             >
-              Construyo pipelines de datos y sistemas escalables.
+              I build data pipelines and scalable systems.
               <span className="hidden sm:inline"><br /></span>
               <span className="sm:hidden"> </span>
-              Especializado en Azure, Databricks y arquitecturas cloud.
+              Specialized in Azure, Databricks, and cloud architectures.
             </motion.p>
           )}
         </div>
@@ -325,13 +325,13 @@ export function Hero() {
                 href="#projects"
                 className="group relative px-4 sm:px-6 py-2.5 sm:py-3 bg-foreground text-background font-mono text-[10px] sm:text-xs tracking-widest uppercase overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
               >
-                <span className="relative z-10">Ver proyectos</span>
+                <span className="relative z-10">View projects</span>
               </a>
               <a
                 href="#contact"
                 className="group px-4 sm:px-6 py-2.5 sm:py-3 border border-foreground/30 text-foreground font-mono text-[10px] sm:text-xs tracking-widest uppercase hover:border-foreground transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
-                Contactar
+                Contact
               </a>
             </motion.div>
           )}

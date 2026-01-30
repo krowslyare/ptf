@@ -6,25 +6,25 @@ import { TextReveal } from "./text-reveal";
 
 const experienceSections = [
   {
-    title: "Profesional",
+    title: "Professional",
     experiences: [
       {
         company: "Ernst & Young (EY)",
-        location: "San Isidro, Perú",
+        location: "San Isidro, Peru",
         period: "2024 — 2025",
         roles: [
           {
-            title: "Analista de Datos / Data Engineer",
+            title: "Data Analyst / Data Engineer",
             level: "Intern → Staff",
             tasks: [
-              "Procesamiento, transformación y análisis de datos financieros (ETL) para auditorías forenses y detección de anomalías.",
-              "Preparación y validación de datasets para flujos de Ingeniería de Datos y consumo analítico.",
+              "Processing, transformation, and analysis of financial data (ETL) for forensic audits and anomaly detection.",
+              "Preparation and validation of datasets for Data Engineering pipelines and analytical consumption.",
             ],
           },
           {
-            title: "Desarrollo de Software",
+            title: "Software Development",
             tasks: [
-              "Desarrollo de microservicio e integración frontend para autenticación, roles y control de accesos.",
+              "Development of microservice and frontend integration for authentication, roles, and access control.",
             ],
           },
         ],
@@ -35,23 +35,22 @@ const experienceSections = [
     title: "Freelance",
     experiences: [
       {
-        company: "Proyectos Independientes",
-        location: "Remoto",
-        period: "2025 — Presente",
+        company: "Independent Projects",
+        location: "Remote",
+        period: "2025 — Present",
         showcase: [
           {
             name: "SMVA",
-            href: "https://smva.com.pe",
             logo: "/smva.png",
           },
         ],
         roles: [
           {
-            title: "Desarrollador Web",
+            title: "Web Developer",
             tasks: [
-              "Diseño y desarrollo de landing pages totalmente responsivas, enfocadas en conversión y experiencia de usuario.",
-              "Gestión integral del ciclo de vida web: desde configuración de dominios y hosting hasta despliegue y optimización.",
-              "Integración de servicios de contacto y notificaciones para facilitar la interacción con clientes.",
+              "Design and development of fully responsive landing pages focused on conversion and user experience.",
+              "Full lifecycle web management: from domain and hosting setup to deployment and optimization.",
+              "Integration of contact services and notifications to facilitate client interaction.",
             ],
           },
         ],
@@ -59,18 +58,18 @@ const experienceSections = [
     ],
   },
   {
-    title: "Operativo",
+    title: "Operations",
     experiences: [
       {
         company: "Aisin Seiki",
         subtitle: "Nishio Die-Casting Plant",
-        location: "Aichi, Japón",
+        location: "Aichi, Japan",
         period: "2021 — 2022",
         roles: [
           {
-            title: "Operador de maquinaria y control de calidad",
+            title: "Machinery Operator & Quality Control",
             tasks: [
-              "Operación de maquinaria industrial y ejecución de controles de calidad bajo estándares productivos.",
+              "Operation of industrial machinery and quality control execution under production standards.",
             ],
           },
         ],
@@ -78,13 +77,13 @@ const experienceSections = [
       {
         company: "Toyota",
         subtitle: "Boshoku Seiko Corporation",
-        location: "Aichi, Japón",
+        location: "Aichi, Japan",
         period: "2021",
         roles: [
           {
-            title: "Operador de ensamblaje",
+            title: "Assembly Line Operator",
             tasks: [
-              "Ensamblaje de asientos automotrices y verificación básica de calidad en línea de producción bajo estándares industriales.",
+              "Automotive seat assembly and basic quality verification on production line under industrial standards.",
             ],
           },
         ],
@@ -152,10 +151,10 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
           />
         ))}
 
-        {exp.showcase && (
+        {/* {exp.showcase && (
           <div className="pt-4">
             <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/50 mb-3 ml-0.5">
-              Algunos ejemplos
+              Some examples
             </p>
             <div className="flex flex-wrap gap-3">
               {exp.showcase.map((project) => (
@@ -165,7 +164,7 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative w-24 h-14 flex items-center justify-center rounded bg-secondary/10 hover:bg-secondary/20 border border-white/5 hover:border-white/10 transition-all duration-300"
-                  title={`Visitar ${project.name}`}
+                  title={`Visit ${project.name}`}
                 >
                   <img 
                     src={project.logo} 
@@ -176,7 +175,7 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
               ))}
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </motion.div>
   );
@@ -243,7 +242,7 @@ export function Experience() {
               style={{ opacity: labelOpacity }}
               className="text-sm font-mono tracking-widest text-muted-foreground uppercase sticky top-24"
             >
-              Experiencia
+              Experience
             </motion.p>
           </div>
 

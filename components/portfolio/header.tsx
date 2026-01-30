@@ -5,10 +5,10 @@ import Link from "next/link";
 import { ThemeToggle } from "./theme-toggle";
 
 const navItems = [
-  { label: "Sobre mí", href: "#about" },
-  { label: "Experiencia", href: "#experience" },
-  { label: "Proyectos", href: "#projects" },
-  { label: "Contacto", href: "#contact" },
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export function Header() {

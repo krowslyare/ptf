@@ -6,10 +6,10 @@ import { ParagraphReveal } from "./text-reveal";
 
 const projects = [
   {
-    title: "Pipeline de Ingeniería de Datos",
+    title: "Data Engineering Pipeline",
     subtitle: "Azure Dataflow Gen2",
     description:
-      "Diseño e implementación de un pipeline de datos para la ingesta y transformación de órdenes almacenadas en Azure Data Lake. Orquestación de flujos ETL mediante Dataflow Gen2, replicando procesos tipo Alteryx para requerimientos específicos del cliente.",
+      "Design and implementation of a data pipeline for ingestion and transformation of orders stored in Azure Data Lake. ETL flow orchestration using Dataflow Gen2, replicating Alteryx-style processes for specific client requirements.",
     technologies: [
       "Azure Data Lake",
       "Microsoft Fabric Dataflow Gen2",
@@ -18,17 +18,17 @@ const projects = [
     ],
   },
   {
-    title: "Modernización de Flujos de Datos",
+    title: "Data Flow Modernization",
     subtitle: "Databricks",
     description:
-      "Migración de flujos de datos complejos a Databricks Notebooks utilizando PySpark. Participación en el diseño, prueba y ejecución de la orquestación de procesos mediante Databricks Jobs.",
+      "Migration of complex data flows to Databricks Notebooks using PySpark. Participation in design, testing, and execution of process orchestration through Databricks Jobs.",
     technologies: ["Databricks", "PySpark", "Databricks Jobs"],
   },
   {
-    title: "Microservicio de Gestión de Usuarios",
+    title: "User Management Microservice",
     subtitle: "Azure",
     description:
-      "Desarrollo de microservicio REST en Java/Spring Boot para la gestión de usuarios, roles y permisos. Implementación de control de accesos y validaciones de autorización a nivel de API. Integración con servicios de notificación para eventos relacionados a usuarios.",
+      "Development of a REST microservice in Java/Spring Boot for user, role, and permission management. Implementation of access control and authorization validations at API level. Integration with notification services for user-related events.",
     technologies: [
       "Java",
       "Spring Boot",
@@ -164,7 +164,7 @@ export function Projects() {
               style={{ opacity: labelOpacity }}
               className="text-sm font-mono tracking-widest text-muted-foreground uppercase sticky top-24"
             >
-              Proyectos
+              Projects
             </motion.p>
           </div>
 
