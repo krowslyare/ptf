@@ -183,7 +183,7 @@ function StatusLine() {
 // Animated border frame
 function BorderFrame() {
   return (
-    <div className="absolute inset-8 md:inset-12 lg:inset-16 pointer-events-none">
+    <div className="absolute inset-4 sm:inset-8 md:inset-12 lg:inset-16 pointer-events-none">
       {/* Corner marks */}
       <div className="absolute top-0 left-0 w-8 h-8">
         <div className="absolute top-0 left-0 w-full h-px bg-foreground/20" />
@@ -231,7 +231,7 @@ export function Hero() {
   return (
     <section 
       ref={containerRef}
-      className="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden bg-background"
+      className="min-h-screen flex items-center justify-center px-10 sm:px-14 md:px-6 pt-20 relative overflow-hidden bg-background"
     >
       <ScanLines />
       <NoiseGrain />

@@ -134,12 +134,12 @@ function SkillRow({ name, items, parentProgress, index, isLast }: SkillRowProps)
   return (
     <motion.div 
       style={{ opacity, y }}
-      className={`group grid grid-cols-[60px_1fr] sm:grid-cols-[80px_1fr] md:grid-cols-[100px_1fr] gap-3 sm:gap-4 md:gap-8 items-baseline py-3 sm:py-4 ${!isLast ? 'border-b border-border/50' : ''}`}
+      className={`group grid grid-cols-1 sm:grid-cols-[80px_1fr] md:grid-cols-[100px_1fr] gap-1 sm:gap-4 md:gap-8 items-baseline py-3 sm:py-4 ${!isLast ? 'border-b border-border/50' : ''}`}
     >
       <span className="text-[10px] sm:text-xs font-mono tracking-wide sm:tracking-widest text-muted-foreground uppercase shrink-0">
         {name}
       </span>
-      <p className="text-xs sm:text-sm md:text-base text-foreground/80 leading-relaxed break-words">
+      <p className="text-xs sm:text-sm md:text-base text-foreground/80 leading-relaxed break-words overflow-hidden">
         {items.map((skill, i) => (
           <span key={skill} className="inline">
             <span className="hover:text-foreground transition-colors duration-200 cursor-default">
@@ -257,7 +257,7 @@ export function About() {
   const labelOpacity = useTransform(labelProgress, [0, 1], [0, 1]);
 
   return (
-    <section id="about" className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 border-t border-border overflow-hidden">
+    <section id="about" className="py-16 sm:py-24 md:py-32 px-10 sm:px-14 md:px-6 border-t border-border overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-12 md:gap-16">
           {/* Label */}

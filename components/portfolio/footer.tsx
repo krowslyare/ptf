@@ -2,7 +2,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-8 px-6 border-t border-border">
+    <footer className="py-8 px-10 sm:px-14 md:px-6 border-t border-border">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm text-muted-foreground font-mono">
           © {currentYear} Hideki Toyama - H.T.

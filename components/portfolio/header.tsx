@@ -31,7 +31,7 @@ export function Header() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-10 sm:px-14 md:px-6 py-4 flex items-center justify-between">
         <Link
           href="/"
           className="font-serif text-xl tracking-tight hover:opacity-70 transition-opacity"

@@ -155,7 +155,7 @@ export function Projects() {
   const labelOpacity = useTransform(labelProgress, [0, 1], [0, 1]);
 
   return (
-    <section id="projects" className="py-32 px-6 border-t border-border">
+    <section id="projects" className="py-16 sm:py-24 md:py-32 px-10 sm:px-14 md:px-6 border-t border-border">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-12 gap-12 md:gap-16">
           {/* Label */}

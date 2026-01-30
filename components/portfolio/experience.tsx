@@ -234,7 +234,7 @@ export function Experience() {
   const labelOpacity = useTransform(labelProgress, [0, 1], [0, 1]);
 
   return (
-    <section id="experience" className="py-32 px-6 bg-secondary/30">
+    <section id="experience" className="py-16 sm:py-24 md:py-32 px-10 sm:px-14 md:px-6 bg-secondary/30">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-12 gap-12 md:gap-16">
           {/* Label */}

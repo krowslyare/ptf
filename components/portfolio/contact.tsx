@@ -33,7 +33,7 @@ export function Contact() {
     <section
       ref={sectionRef}
       id="contact"
-      className="py-32 px-6 bg-foreground text-background"
+      className="py-16 sm:py-24 md:py-32 px-10 sm:px-14 md:px-6 bg-foreground text-background"
     >
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-12 gap-12 md:gap-16">
