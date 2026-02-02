@@ -40,6 +40,11 @@ const experienceSections = [
         period: "2025 — Present",
         showcase: [
           {
+            name: "KuroGrid",
+            href: "https://kurogrid.com",
+            logo: "/kurogrid logo.png",
+          },
+          {
             name: "SMVA",
             href: "https://test-smva.netlify.app",
             logo: "/smva.png",
