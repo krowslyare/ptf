@@ -45,14 +45,9 @@ const experienceSections = [
             logo: "/kurogrid logo.png",
           },
           {
-            name: "SMVA",
-            href: "https://test-smva.netlify.app",
-            logo: "/smva.png",
-          },
-          {
-            name: "Noxon",
-            href: "https://noxon.lat",
-            logo: "/noxon.png",
+            name: "Pokorb",
+            href: "https://pokorb.com",
+            logo: "/pokorb.png",
           },
         ],
         roles: [
@@ -108,7 +103,7 @@ type Experience = (typeof experienceSections)[number]["experiences"][number] & {
   showcase?: {
     name: string;
     href: string;
-    logo: string;
+    logo?: string;
   }[];
 };
 
@@ -166,7 +161,7 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
         {exp.showcase && (
           <div className="pt-4">
             <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/50 mb-3 ml-0.5">
-              Some examples
+              Algunos ejemplos
             </p>
             <div className="flex flex-wrap gap-3">
               {exp.showcase.map((project) => (
@@ -178,11 +173,17 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
                   className="group relative w-24 h-14 flex items-center justify-center rounded bg-secondary/10 hover:bg-secondary/20 border border-white/5 hover:border-white/10 transition-all duration-300"
                   title={`Visit ${project.name}`}
                 >
-                  <img 
-                    src={project.logo} 
-                    alt={project.name} 
-                    className="w-full h-full object-contain p-1.5 opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300" 
-                  />
+                  {project.logo ? (
+                    <img
+                      src={project.logo}
+                      alt={project.name}
+                      className="w-full h-full object-contain p-1.5 opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
+                    />
+                  ) : (
+                    <span className="text-[10px] font-mono tracking-widest text-muted-foreground/70 uppercase group-hover:text-foreground transition-colors duration-300">
+                      {project.name.slice(0, 2)}
+                    </span>
+                  )}
                 </a>
               ))}
             </div>
