@@ -41,6 +41,59 @@ const professionalProjects = [
 
 const personalProjects = [
   {
+    title: "Kurogrid Client Portal",
+    subtitle: "Next.js + Supabase",
+    description:
+      "Full-stack client onboarding portal with authentication, project state management, and file uploads. Features multi-step forms with draft/submitted/locked states, PostgreSQL database with Row Level Security (RLS), and cloud storage integration for client assets.",
+    technologies: [
+      "Next.js",
+      "React",
+      "Supabase",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "PostgreSQL",
+    ],
+    github: "",
+    demo: "https://portal.kurogrid.com",
+  },
+  {
+    title: "Pokorb E-Commerce Platform",
+    subtitle: "Next.js + WhatsApp Integration",
+    description:
+      "Pseudo e-commerce platform for artisan products with catalog browsing, shopping cart, and WhatsApp checkout integration. Features a complaints book (Libro de Reclamaciones) for customer service compliance, product filtering, and direct messaging for order placement. Built with responsive design and optimized for conversion.",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "WhatsApp Business API",
+      "Framer Motion",
+    ],
+    github: "",
+    demo: "https://pokorb.com",
+  },
+  {
+    title: "VRD Inventory Management System",
+    subtitle: "ERP Web Application",
+    description:
+      "Enterprise Resource Planning system for inventory management with real-time stock tracking, warehouse operations, and movement history. Implements ingreso/salida workflows with database-driven validation, cost freezing, and posting logic. Features authenticated inventory areas, API routes for movements, and Excel export capabilities.",
+    technologies: [
+      "Next.js",
+      "Supabase",
+      "TypeScript",
+      "React Hook Form",
+      "Zod",
+      "TanStack Table",
+      "Recharts",
+      "ExcelJS",
+      "Playwright",
+      "Sentry",
+    ],
+    github: "",
+    demo: "https://vrd-inv.vercel.app/",
+  },
+  {
     title: "Self-Hosted Cloud Infrastructure",
     subtitle: "Google Cloud Platform",
     description:
@@ -94,10 +147,6 @@ function ProjectCard({ project }: ProjectCardProps) {
       ref={ref}
       style={{ opacity, y, scale }}
       className="group p-6 md:p-8 border border-border hover:border-foreground hover:bg-foreground/[0.02] transition-all duration-300 ease-out"
-      whileHover={{ 
-        y: -2,
-        transition: { duration: 0.25, ease: "easeOut" }
-      }}
     >
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
         <div>
@@ -153,7 +202,7 @@ function ProjectCard({ project }: ProjectCardProps) {
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
-                Live Demo
+                Visit Site
               </a>
             )}
             {!project.github && !project.demo && (

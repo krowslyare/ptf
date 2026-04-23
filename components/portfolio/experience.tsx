@@ -37,20 +37,24 @@ const experienceSections = [
       {
         company: "Independent Projects",
         location: "Remote",
-        period: "2025 — Present",
+        period: "2026 — Present",
         showcase: [
           {
             name: "KuroGrid",
             href: "https://kurogrid.com",
             logo: "/kurogrid logo.png",
           },
-          {
-            name: "Pokorb",
-            href: "https://pokorb.com",
-            logo: "/pokorb.png",
-          },
         ],
         roles: [
+          {
+            title: "Full-Stack Developer",
+            tasks: [
+              "Development of full-stack web applications with authentication, database design, and cloud storage integration using Next.js and Supabase.",
+              "Implementation of ERP systems for inventory management with real-time tracking, warehouse operations, and Excel reporting.",
+              "Database architecture with PostgreSQL: Row Level Security (RLS), state management, and storage policies.",
+              "API development with Next.js route handlers, data validation with Zod, and form handling with React Hook Form.",
+            ],
+          },
           {
             title: "Web Developer",
             tasks: [
@@ -160,9 +164,6 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
 
         {exp.showcase && (
           <div className="pt-4">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground/50 mb-3 ml-0.5">
-              Algunos ejemplos
-            </p>
             <div className="flex flex-wrap gap-3">
               {exp.showcase.map((project) => (
                 <a

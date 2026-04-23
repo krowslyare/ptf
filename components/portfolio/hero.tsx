@@ -285,7 +285,7 @@ export function Hero() {
               <span className="w-6 sm:w-12 h-px bg-foreground shrink-0" />
               <span className="font-mono text-[10px] sm:text-xs md:text-sm tracking-[0.15em] sm:tracking-[0.2em] text-muted-foreground uppercase">
                 <TypewriterText 
-                  text="Cloud & Data Engineer" 
+                  text="Software & Data Engineer" 
                   speed={30}
                   onComplete={handleSubtitleComplete}
                 />
@@ -304,12 +304,12 @@ export function Hero() {
               className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed font-light"
             >
               <TypewriterText 
-                text="I build cloud infrastructure, data pipelines, and scalable systems." 
+                text="I build full-stack applications, data pipelines, and cloud systems." 
                 speed={20}
               />
               <br />
               <TypewriterText 
-                text="Specialized in Azure, Databricks, and cloud architectures." 
+                text="Specialized in Next.js, PostgreSQL, Azure, and cloud architectures." 
                 delay={1400}
                 speed={20}
                 onComplete={() => setShowCTA(true)}

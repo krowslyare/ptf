@@ -10,45 +10,41 @@ const skills = {
     "Python",
     "SQL",
     "Java",
-    "PySpark"
+    "TypeScript/JavaScript"
   ],
-  cloud: [
-    "Microsoft Azure",
-    "Google Cloud Platform",
-    "Cloud Infrastructure (IaaS)"
+  aiLLMs: [
+    "Agentic Coding (Claude Code, Cursor, Codex)",
+    "Prompt Engineering",
+    "RAG",
+    "AI Agents",
+    "Context Management",
+    "Cost Optimization",
+    "MCP"
   ],
-  dataEngineering: [
-    "ETL / Data Pipelines",
-    "Data Modeling",
-    "Data Warehousing",
-    "Batch Processing"
-  ],
-  platforms: [
-    "Databricks",
-    "Microsoft Fabric"
-  ],
-  backend: [
+  webBackend: [
+    "Next.js",
+    "React",
+    "Node.js",
     "REST APIs",
-    "Microservices",
-    "Spring Boot"
+    "Spring Boot",
+    "Microservices"
   ],
-  infrastructure: [
-    "Linux Server Administration",
-    "Virtual Machines Provisioning & Management",
-    "Self-hosted Deployments",
-    "Networking Fundamentals (SSH, DNS, HTTP, TLS)"
+  cloudData: [
+    "Azure",
+    "GCP",
+    "BigQuery",
+    "Databricks",
+    "ETL Pipelines",
+    "Data Modeling"
   ],
-  devTools: [
+  tools: [
     "Git",
     "Docker",
     "Airflow",
     "dbt",
+    "Playwright",
     "Power BI",
-    "Jupyter"
-  ],
-  workflow: [
-    "Automation & Scripting",
-    "CLI-first Development"
+    "Vercel"
   ]
 };
 
@@ -95,13 +91,10 @@ function SkillsSection() {
 
   const categoryNames: Record<string, string> = {
     languages: "Languages",
-    cloud: "Cloud",
-    dataEngineering: "Data",
-    platforms: "Platforms",
-    backend: "Backend",
-    infrastructure: "Infra",
-    devTools: "Tools",
-    workflow: "Workflow",
+    aiLLMs: "AI & LLMs",
+    webBackend: "Web & Backend",
+    cloudData: "Cloud & Data",
+    tools: "Tools",
   };
 
   const entries = Object.entries(skills);
@@ -159,14 +152,14 @@ function SkillRow({ name, items, parentProgress, index, isLast }: SkillRowProps)
       <span className="text-[10px] sm:text-xs font-mono tracking-wide sm:tracking-widest text-muted-foreground uppercase shrink-0">
         {name}
       </span>
-      <p className="text-xs sm:text-sm md:text-base text-foreground/80 leading-relaxed break-words overflow-hidden">
+      <p className="text-xs sm:text-sm md:text-base text-foreground leading-relaxed break-words overflow-hidden">
         {items.map((skill, i) => (
           <span key={skill} className="inline">
-            <span className="hover:text-foreground transition-colors duration-200 cursor-default">
+            <span className="hover:text-foreground/80 transition-colors duration-200 cursor-default">
               {skill}
             </span>
             {i < items.length - 1 && (
-              <span className="text-muted-foreground/40 mx-1 sm:mx-2">·</span>
+              <span className="text-muted-foreground/50 mx-1.5 sm:mx-2">·</span>
             )}
           </span>
         ))}
