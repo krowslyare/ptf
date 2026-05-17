@@ -91,7 +91,7 @@ const personalProjects = [
       "Sentry",
     ],
     github: "",
-    demo: "https://vrd-inv.vercel.app/",
+    demo: "https://portal.vrdmincon.com.pe",
   },
   {
     title: "Self-Hosted Cloud Infrastructure",
@@ -107,43 +107,6 @@ const personalProjects = [
     ],
     github: "",
     demo: "",
-  },
-  {
-    title: "Kurogrid Client Portal",
-    subtitle: "Next.js + Supabase",
-    description:
-      "Full-stack client onboarding portal with authentication, project state management, and file uploads. Features multi-step forms with draft/submitted/locked states, PostgreSQL database with Row Level Security (RLS), and cloud storage integration for client assets.",
-    technologies: [
-      "Next.js",
-      "React",
-      "Supabase",
-      "TypeScript",
-      "Tailwind CSS",
-      "Framer Motion",
-      "PostgreSQL",
-    ],
-    github: "",
-    demo: "",
-  },
-  {
-    title: "VRD Inventory Management System",
-    subtitle: "ERP Web Application",
-    description:
-      "Enterprise Resource Planning system for inventory management with real-time stock tracking, warehouse operations, and movement history. Implements ingreso/salida workflows with database-driven validation, cost freezing, and posting logic. Features authenticated inventory areas, API routes for movements, and Excel export capabilities.",
-    technologies: [
-      "Next.js",
-      "Supabase",
-      "TypeScript",
-      "React Hook Form",
-      "Zod",
-      "TanStack Table",
-      "Recharts",
-      "ExcelJS",
-      "Playwright",
-      "Sentry",
-    ],
-    github: "",
-    demo: "https://portal.vrdmincon.com.pe",
   },
 ];
 
