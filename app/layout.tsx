@@ -28,15 +28,15 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/icon',
+        url: '/icon?v=2',
       },
       {
-        url: '/favicon.svg',
+        url: '/favicon.svg?v=2',
         type: 'image/svg+xml',
       },
     ],
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
+    shortcut: '/icon?v=2',
+    apple: '/icon?v=2',
   },
 }
 
