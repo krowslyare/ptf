@@ -171,15 +171,6 @@
   text-orientation: upright;
 }
 
-/* Engineering-drawing grid. Sits behind content at very low contrast; the
-   point is texture you notice only once you look for it. */
-@utility grid-field {
-  background-image:
-    linear-gradient(to right, var(--border) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-  background-size: 96px 96px;
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

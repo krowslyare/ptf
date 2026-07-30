@@ -1,5 +1,7 @@
 "use client";
 
+import type { ReactNode } from "react";
+
 import { Reveal, Stagger, StaggerItem } from "./reveal";
 import { SectionLabel } from "./section-label";
 
@@ -87,7 +89,14 @@ const experienceSections = [
             tasks: [
               "Corporate sites and storefronts built for SEO and conversion, with copy and data centralized so clients can update content without touching components.",
               "End-to-end project ownership: domain registration, DNS, hosting, deployment pipelines, analytics, and ongoing maintenance.",
-              "Peruvian regulatory compliance across client sites: Libro de Reclamaciones, privacy policy, and terms of service.",
+              <>
+                Peruvian regulatory compliance across client sites: the
+                mandatory complaints book (
+                <em lang="es" className="italic">
+                  Libro de Reclamaciones
+                </em>
+                ), privacy policy, and terms of service.
+              </>,
               "Lead capture and WhatsApp-based checkout flows, matching how the clients were already selling.",
             ],
           },
@@ -206,7 +215,7 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
 interface Role {
   title: string;
   level?: string;
-  tasks: string[];
+  tasks: ReactNode[];
 }
 
 interface RoleItemProps {
@@ -225,9 +234,9 @@ function RoleItem({ role }: RoleItemProps) {
         )}
       </div>
       <ul className="space-y-2">
-        {role.tasks.map((task) => (
+        {role.tasks.map((task, i) => (
           <li
-            key={task}
+            key={i}
             className="text-muted-foreground leading-relaxed flex gap-3"
           >
             <span className="text-foreground/30 mt-1.5">—</span>

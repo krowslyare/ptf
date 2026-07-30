@@ -42,10 +42,9 @@ export function Header() {
       <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-4 sm:px-10 md:px-16 lg:px-24">
         <Link
           href="#top"
-          className="group flex items-baseline gap-2 transition-opacity hover:opacity-70"
+          className="font-serif text-xl tracking-tight transition-opacity hover:opacity-70"
         >
-          <span className="font-serif text-xl tracking-tight">H.T.</span>
-          <span className="h-1 w-1 rounded-full bg-brand transition-transform duration-300 group-hover:scale-150" />
+          H.T.
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

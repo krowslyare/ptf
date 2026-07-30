@@ -50,7 +50,7 @@ export function TracingBeam({ children }: { children: React.ReactNode }) {
         />
       </div>
 
-      <div ref={contentRef} className="relative md:pl-12">
+      <div ref={contentRef} className="relative">
         {children}
       </div>
     </motion.div>

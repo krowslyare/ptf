@@ -94,29 +94,7 @@ export function Hero() {
       id="top"
       className="relative min-h-screen overflow-hidden border-b border-border bg-background"
     >
-      {/* Engineering grid, drawn in behind everything */}
-      <motion.div
-        aria-hidden="true"
-        className="grid-field absolute inset-0 opacity-[0.5]"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.5 }}
-        transition={{ duration: 1.4, ease: "easeOut" }}
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/70 to-background"
-      />
       <Grain />
-
-      {/* Full-height rules that the type deliberately crosses */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 left-[8%] hidden w-px bg-border md:block"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 right-[8%] hidden w-px bg-border lg:block"
-      />
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-[1600px] flex-col justify-between px-6 pb-8 pt-24 sm:px-10 md:px-16 lg:px-24">
         <CornerTicks />
