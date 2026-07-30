@@ -25,9 +25,9 @@ const enterpriseProjects = [
   },
   {
     title: "User Management Microservice",
-    subtitle: "Azure",
+    subtitle: "Azure · contributor",
     description:
-      "REST microservice in Java/Spring Boot for users, roles, and permissions. Access control and authorization checks enforced at the API layer, with integration into notification services for user events.",
+      "Internal Java/Spring Boot service for users, roles and permissions, built by a team I contributed to. My part was role management: implementing it at the API layer and verifying that the authorization checks behaved correctly for each role.",
     technologies: [
       "Java",
       "Spring Boot",
@@ -158,7 +158,7 @@ const personalProjects = [
     title: "Self-Hosted Cloud Infrastructure",
     subtitle: "Google Cloud Platform",
     description:
-      "Linux VMs on GCP running my own services: firewall rules, SSH access and networking configured by hand, containerized deploys with Docker, Cloud Storage buckets, and a few migrations between environments. Most of what I know about production came from breaking this first.",
+      "Linux VMs on GCP running my own services: firewall rules, SSH access and networking configured by hand, containerized deploys with Docker, Cloud Storage buckets, and a few migrations between environments. Nothing here has users, which is the point: it is where I try the things I would not try first on a client's box.",
     technologies: [
       "GCP Compute Engine",
       "Linux",

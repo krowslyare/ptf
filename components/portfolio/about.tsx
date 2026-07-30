@@ -13,11 +13,9 @@ const skills = {
     "Java",
     "TypeScript/JavaScript"
   ],
-  aiLLMs: [
+  aiAssisted: [
     "Agentic Coding (Claude Code, Cursor, Codex)",
     "Prompt Engineering",
-    "RAG",
-    "AI Agents",
     "Context Management",
     "Cost Optimization",
     "MCP"
@@ -90,7 +88,7 @@ const certifications = [
 function SkillsSection() {
   const categoryNames: Record<string, string> = {
     languages: "Languages",
-    aiLLMs: "AI & LLMs",
+    aiAssisted: "AI-Assisted Dev",
     webBackend: "Web & Backend",
     databases: "Databases",
     cloudData: "Cloud & Data",
@@ -225,15 +223,19 @@ export function About() {
             {/* Bio */}
             <div className="space-y-4 sm:space-y-6">
               <ParagraphReveal
-                text="I work across backend, frontend, data, and infrastructure. In practice that means I usually end up owning a project from the database schema to the domain it runs on—which is what the teams I work with actually need."
+                text="I work across backend, frontend, data, and infrastructure. In practice that means I usually end up owning a project from the database schema up to the domain it runs on."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
               <ParagraphReveal
-                text="At EY I worked on ETL pipelines and financial data analysis for forensic audits, plus a Spring Boot microservice for authentication and access control. On my own I build and maintain web systems for businesses in Peru: a multi-tenant client portal, an inventory ERP for a mining contractor, and the sites in front of them."
+                text="At EY I worked on ETL pipelines and financial data analysis for forensic audits, and contributed role management to an internal Spring Boot service. On my own I build and maintain web systems for businesses in Peru: a multi-tenant client portal, an inventory ERP for a mining contractor, and the sites in front of them."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
               <ParagraphReveal
                 text="Most of what I know about production I learned self-hosting: VMs, containers, DNS, backups, and the migrations that go wrong at 2am."
+                className="text-base sm:text-lg text-muted-foreground leading-relaxed"
+              />
+              <ParagraphReveal
+                text="My family is in Japan and I hold permanent residency there. During the pandemic I paused my degree and spent 2021 and 2022 on the line at two auto parts plants in Aichi. Not engineering, but it explains the gap in the timeline, and it is why I can work in Japan without paperwork."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
 
@@ -253,7 +255,7 @@ export function About() {
                 />
                 <div className="text-[9px] sm:text-xs md:text-sm tracking-wide sm:tracking-widest uppercase font-mono min-w-0">
                   <p className="text-foreground font-medium break-words">Pontificia Universidad Católica del Perú</p>
-                  <p className="text-muted-foreground mt-1">Computer Science</p>
+                  <p className="text-muted-foreground mt-1">Computer Engineering</p>
                 </div>
               </Reveal>
             </div>

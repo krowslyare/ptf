@@ -25,7 +25,7 @@ const experienceSections = [
           {
             title: "Software Development",
             tasks: [
-              "Development of microservice and frontend integration for authentication, roles, and access control.",
+              "Role management on an internal Spring Boot microservice: implementation at the API layer and verification that authorization behaved correctly per role.",
             ],
           },
         ],
@@ -36,7 +36,7 @@ const experienceSections = [
     title: "Freelance",
     experiences: [
       {
-        company: "Independent Projects",
+        company: "Kurogrid",
         location: "Remote",
         period: "2026 — Present",
         showcase: [
