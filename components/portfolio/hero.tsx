@@ -103,7 +103,7 @@ export function Hero() {
                 className="mb-5 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-brand sm:text-xs"
               >
                 <span className="h-px w-8 bg-brand sm:w-14" />
-                Software &amp; Data Engineer
+                Software Engineer
               </motion.p>
 
               <h1 className="font-serif font-medium leading-[0.82] tracking-[-0.02em]">
