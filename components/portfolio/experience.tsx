@@ -16,7 +16,7 @@ const experienceSections = [
         roles: [
           {
             title: "Data Analyst / Data Engineer",
-            level: "Intern → Staff",
+            level: "Staff",
             tasks: [
               "Processing, transformation, and analysis of financial data (ETL) for forensic audits and anomaly detection.",
               "Preparation and validation of datasets for Data Engineering pipelines and analytical consumption.",

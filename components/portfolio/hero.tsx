@@ -6,9 +6,9 @@ import { CharCascade, ScrambleText, WordFade } from "./decode-text";
 import { Kana } from "./kana";
 
 /**
- * 黒 — the hero is built as a technical drawing: a strict hairline grid, type
- * set large enough to break it, and one accent colour used sparingly enough
- * that it still reads as an accent.
+ * 黒 — type set large enough to carry the composition on its own, framed by
+ * two mono rails and a single accent colour used sparingly enough that it
+ * still reads as an accent.
  */
 
 function StatusLine() {
@@ -40,27 +40,6 @@ function StatusLine() {
       <span className="tabular-nums">{time}</span>
       <span className="h-3 w-px bg-border" />
       <span>Lima, PE</span>
-    </div>
-  );
-}
-
-/** Corner ticks, as on a cut sheet. */
-function CornerTicks() {
-  const corners = [
-    "top-0 left-0 border-t border-l",
-    "top-0 right-0 border-t border-r",
-    "bottom-0 left-0 border-b border-l",
-    "bottom-0 right-0 border-b border-r",
-  ];
-
-  return (
-    <div className="pointer-events-none absolute inset-0">
-      {corners.map((position) => (
-        <span
-          key={position}
-          className={`absolute h-4 w-4 border-foreground/25 ${position}`}
-        />
-      ))}
     </div>
   );
 }
@@ -97,8 +76,6 @@ export function Hero() {
       <Grain />
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-[1600px] flex-col justify-between px-6 pb-8 pt-24 sm:px-10 md:px-16 lg:px-24">
-        <CornerTicks />
-
         {/* ── Top rail ─────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0 }}
