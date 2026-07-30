@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 // Typewriter effect with blinking cursor
 function TypewriterText({ 
@@ -20,33 +20,57 @@ function TypewriterText({
   const [displayed, setDisplayed] = useState("");
   const [showCursor, setShowCursor] = useState(true);
   const [isTyping, setIsTyping] = useState(false);
+  const reduced = useReducedMotion();
+
+  // Held in a ref so it stays out of the effect's dependencies. Call sites pass
+  // inline arrows, and those change identity on every render: with onComplete
+  // in the deps, the effect re-ran the moment its own callback set state, and
+  // the line typed itself a second time.
+  const onCompleteRef = useRef(onComplete);
+  useEffect(() => {
+    onCompleteRef.current = onComplete;
+  });
 
   useEffect(() => {
+    if (reduced) {
+      setDisplayed(text);
+      onCompleteRef.current?.();
+      return;
+    }
+
+    let interval: ReturnType<typeof setInterval> | undefined;
+
     const startTimeout = setTimeout(() => {
       setIsTyping(true);
       let i = 0;
-      const interval = setInterval(() => {
+      interval = setInterval(() => {
         if (i < text.length) {
           setDisplayed(text.slice(0, i + 1));
           i++;
         } else {
           clearInterval(interval);
           setIsTyping(false);
-          onComplete?.();
+          onCompleteRef.current?.();
         }
       }, speed);
-      return () => clearInterval(interval);
     }, delay);
-    return () => clearTimeout(startTimeout);
-  }, [text, delay, speed, onComplete]);
+
+    // The previous cleanup for this interval was returned from inside the
+    // setTimeout callback, where React never saw it, so it leaked on unmount.
+    return () => {
+      clearTimeout(startTimeout);
+      clearInterval(interval);
+    };
+  }, [text, delay, speed, reduced]);
 
   // Cursor blink
   useEffect(() => {
+    if (reduced) return;
     const cursorInterval = setInterval(() => {
       setShowCursor(prev => !prev);
     }, 530);
     return () => clearInterval(cursorInterval);
-  }, []);
+  }, [reduced]);
 
   return (
     <span className={className}>
@@ -64,16 +88,25 @@ function TypewriterText({
 function GlitchText({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const [isGlitching, setIsGlitching] = useState(false);
   const [glitchOffset, setGlitchOffset] = useState({ x: 0, y: 0 });
+  const reduced = useReducedMotion();
 
   useEffect(() => {
+    if (reduced) return;
+
+    // Each cycle schedules the next one, so the pending id has to be tracked
+    // across cycles: clearing only the first timeout left the chain running
+    // after unmount.
+    let nextTimeout: ReturnType<typeof setTimeout>;
+    let resetTimeout: ReturnType<typeof setTimeout>;
+
     const triggerGlitch = () => {
       setIsGlitching(true);
       setGlitchOffset({
         x: (Math.random() - 0.5) * 4,
         y: (Math.random() - 0.5) * 2,
       });
-      
-      setTimeout(() => {
+
+      resetTimeout = setTimeout(() => {
         setIsGlitching(false);
         setGlitchOffset({ x: 0, y: 0 });
       }, 100 + Math.random() * 100);
@@ -81,16 +114,18 @@ function GlitchText({ children, className = "" }: { children: React.ReactNode; c
 
     // Random glitch every 3-8 seconds
     const scheduleGlitch = () => {
-      const nextGlitch = 3000 + Math.random() * 5000;
-      return setTimeout(() => {
+      nextTimeout = setTimeout(() => {
         triggerGlitch();
         scheduleGlitch();
-      }, nextGlitch);
+      }, 3000 + Math.random() * 5000);
     };
 
-    const timeout = scheduleGlitch();
-    return () => clearTimeout(timeout);
-  }, []);
+    scheduleGlitch();
+    return () => {
+      clearTimeout(nextTimeout);
+      clearTimeout(resetTimeout);
+    };
+  }, [reduced]);
 
   return (
     <span className={`relative inline-block ${className}`}>

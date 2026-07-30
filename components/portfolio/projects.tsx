@@ -1,8 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { ParagraphReveal } from "./text-reveal";
+import { Reveal, Stagger, StaggerItem } from "./reveal";
 
 const enterpriseProjects = [
   {
@@ -208,30 +206,13 @@ const projectGroups: {
 
 interface ProjectCardProps {
   project: Project;
-  index: number;
 }
 
 function ProjectCard({ project }: ProjectCardProps) {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.95", "start 0.25"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 25,
-    restDelta: 0.001,
-  });
-
-  const opacity = useTransform(smoothProgress, [0, 0.5], [0, 1]);
-  const y = useTransform(smoothProgress, [0, 0.5], [50, 0]);
-  const scale = useTransform(smoothProgress, [0, 0.5], [0.96, 1]);
-
   return (
-    <motion.article
-      ref={ref}
-      style={{ opacity, y, scale }}
+    <Reveal
+      as="article"
+      y={24}
       className="group p-6 md:p-8 border border-border hover:border-foreground hover:bg-foreground/[0.02] transition-all duration-300 ease-out"
     >
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
@@ -245,16 +226,12 @@ function ProjectCard({ project }: ProjectCardProps) {
         </div>
       </div>
 
-      <ParagraphReveal
-        text={project.description}
-        className="text-muted-foreground leading-relaxed mb-6"
-      />
+      <p className="text-muted-foreground leading-relaxed mb-6">
+        {project.description}
+      </p>
 
       <div className="flex flex-wrap items-center gap-4 mb-4">
-        <TechTags 
-          technologies={project.technologies} 
-          parentProgress={scrollYProgress}
-        />
+        <TechTags technologies={project.technologies} />
       </div>
 
       {/* Links or Confidential badge */}
@@ -299,81 +276,53 @@ function ProjectCard({ project }: ProjectCardProps) {
           </>
         )}
       </div>
-    </motion.article>
+    </Reveal>
   );
 }
 
 interface TechTagsProps {
   technologies: string[];
-  parentProgress: ReturnType<typeof useScroll>["scrollYProgress"];
 }
 
-function TechTags({ technologies, parentProgress }: TechTagsProps) {
-  const smoothProgress = useSpring(parentProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
+/**
+ * Tags cascade in on a fixed timeline. The previous version sliced the card's
+ * scroll progress per tag, which meant a card with nine or more tags mapped its
+ * last tags past the end of the range: they settled at ~88% opacity and stayed
+ * there. Stagger is independent of tag count.
+ */
+function TechTags({ technologies }: TechTagsProps) {
   return (
-    <div className="flex flex-wrap gap-2">
-      {technologies.map((tech, i) => {
-        const start = 0.3 + i * 0.06;
-        return (
-          <TechTag 
-            key={tech} 
-            tech={tech} 
-            progress={smoothProgress}
-            range={[start, start + 0.25]}
-          />
-        );
-      })}
-    </div>
-  );
-}
-
-interface TechTagProps {
-  tech: string;
-  progress: ReturnType<typeof useSpring>;
-  range: [number, number];
-}
-
-function TechTag({ tech, progress, range }: TechTagProps) {
-  const opacity = useTransform(progress, range, [0, 1]);
-  const y = useTransform(progress, range, [8, 0]);
-  const scale = useTransform(progress, range, [0.9, 1]);
-
-  return (
-    <motion.span
-      style={{ opacity, y, scale }}
-      className="px-2 py-1 text-xs font-mono border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors duration-200"
-      whileHover={{ scale: 1.05 }}
-    >
-      {tech}
-    </motion.span>
+    <Stagger className="flex flex-wrap gap-2" stagger={0.04}>
+      {technologies.map((tech) => (
+        <StaggerItem
+          key={tech}
+          as="span"
+          y={8}
+          duration={0.3}
+          className="px-2 py-1 text-xs font-mono border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors duration-200"
+          whileHover={{ scale: 1.05 }}
+        >
+          {tech}
+        </StaggerItem>
+      ))}
+    </Stagger>
   );
 }
 
 export function Projects() {
-  const labelRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: labelProgress } = useScroll({
-    target: labelRef,
-    offset: ["start 0.9", "start 0.6"],
-  });
-  const labelOpacity = useTransform(labelProgress, [0, 1], [0, 1]);
-
   return (
     <section id="projects" className="py-16 sm:py-24 md:py-32 px-10 sm:px-14 md:px-6 border-t border-border">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-12 gap-12 md:gap-16">
           {/* Label */}
-          <div className="md:col-span-3" ref={labelRef}>
-            <motion.p
-              style={{ opacity: labelOpacity }}
+          <div className="md:col-span-3">
+            <Reveal
+              as="p"
+              y={8}
               className="text-sm font-mono tracking-widest text-muted-foreground uppercase sticky top-24"
             >
               Projects
-            </motion.p>
+            </Reveal>
           </div>
 
           {/* Content */}
@@ -395,7 +344,7 @@ export function Projects() {
                   </p>
                 </div>
                 <div className="space-y-8">
-                  {group.projects.map((project, index) => (
+                  {group.projects.map((project) => (
                     <ProjectCard
                       key={project.title}
                       project={
@@ -403,7 +352,6 @@ export function Projects() {
                           ? { ...project, confidential: true }
                           : project
                       }
-                      index={index}
                     />
                   ))}
                 </div>

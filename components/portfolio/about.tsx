@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
+import { Reveal, Stagger, StaggerItem } from "./reveal";
 import { TextReveal, ParagraphReveal } from "./text-reveal";
 
 const skills = {
@@ -87,18 +87,6 @@ const certifications = [
 ];
 
 function SkillsSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.95", "start 0.3"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
   const categoryNames: Record<string, string> = {
     languages: "Languages",
     aiLLMs: "AI & LLMs",
@@ -108,28 +96,23 @@ function SkillsSection() {
     tools: "Tools",
   };
 
-  const entries = Object.entries(skills);
-
   return (
-    <div ref={ref} className="space-y-8">
-      <TextReveal 
-        text="Skills" 
+    <div className="space-y-8">
+      <TextReveal
+        text="Skills"
         className="font-serif text-2xl"
         as="h3"
       />
 
-      <div className="space-y-6">
-        {entries.map(([category, items], catIndex) => (
-          <SkillRow 
+      <Stagger className="space-y-6" stagger={0.07}>
+        {Object.entries(skills).map(([category, items]) => (
+          <SkillRow
             key={category}
             name={categoryNames[category]}
             items={items}
-            parentProgress={smoothProgress}
-            index={catIndex}
-            isLast={catIndex === entries.length - 1}
           />
         ))}
-      </div>
+      </Stagger>
     </div>
   );
 }
@@ -137,28 +120,12 @@ function SkillsSection() {
 interface SkillRowProps {
   name: string;
   items: string[];
-  parentProgress: ReturnType<typeof useSpring>;
-  index: number;
-  isLast: boolean;
 }
 
-function SkillRow({ name, items, parentProgress, index, isLast }: SkillRowProps) {
-  const start = isLast ? 0 : index * 0.12;
-  const opacity = useTransform(
-    parentProgress,
-    [start, start + 0.25],
-    [0, 1]
-  );
-  const y = useTransform(
-    parentProgress,
-    [start, start + 0.25],
-    [10, 0]
-  );
-
+function SkillRow({ name, items }: SkillRowProps) {
   return (
-    <motion.div 
-      style={{ opacity, y }}
-      className={`group grid grid-cols-1 sm:grid-cols-[80px_1fr] md:grid-cols-[100px_1fr] gap-1 sm:gap-4 md:gap-8 items-baseline py-3 sm:py-4 border-b border-border/50`}
+    <StaggerItem
+      className="group grid grid-cols-1 sm:grid-cols-[80px_1fr] md:grid-cols-[100px_1fr] gap-1 sm:gap-4 md:gap-8 items-baseline py-3 sm:py-4 border-b border-border/50"
     >
       <span className="text-[10px] sm:text-xs font-mono tracking-wide sm:tracking-widest text-muted-foreground uppercase shrink-0">
         {name}
@@ -175,67 +142,37 @@ function SkillRow({ name, items, parentProgress, index, isLast }: SkillRowProps)
           </span>
         ))}
       </p>
-    </motion.div>
+    </StaggerItem>
   );
 }
 
 function CertificationsSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.95", "start 0.3"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
   return (
-    <div ref={ref} className="space-y-6">
-      <TextReveal 
-        text="Certifications" 
+    <div className="space-y-6">
+      <TextReveal
+        text="Certifications"
         className="font-serif text-2xl"
         as="h3"
       />
 
-      <div className="space-y-4">
-        {certifications.map((cert, index) => {
-          const totalCerts = certifications.length;
-          const start = (index / totalCerts) * 0.5;
-          const end = start + 0.4;
-          
-          return (
-            <CertificationCard 
-              key={cert.name}
-              cert={cert}
-              progress={smoothProgress}
-              range={[start, Math.min(end, 1)]}
-              index={index}
-            />
-          );
-        })}
-      </div>
+      <Stagger className="space-y-4" stagger={0.08}>
+        {certifications.map((cert) => (
+          <CertificationCard key={cert.name} cert={cert} />
+        ))}
+      </Stagger>
     </div>
   );
 }
 
 interface CertificationCardProps {
   cert: typeof certifications[number];
-  progress: ReturnType<typeof useSpring>;
-  range: [number, number];
-  index: number;
 }
 
-function CertificationCard({ cert, progress, range }: CertificationCardProps) {
-  const opacity = useTransform(progress, range, [0, 1]);
-  const y = useTransform(progress, range, [20, 0]);
-  const scale = useTransform(progress, range, [0.98, 1]);
-
+function CertificationCard({ cert }: CertificationCardProps) {
   return (
-    <motion.a
-      style={{ opacity, y, scale }}
+    <StaggerItem
+      as="a"
+      y={16}
       href={cert.url}
       target="_blank"
       rel="noopener noreferrer"
@@ -268,30 +205,24 @@ function CertificationCard({ cert, progress, range }: CertificationCardProps) {
           d="M7 17L17 7M17 7H7M17 7V17"
         />
       </motion.svg>
-    </motion.a>
+    </StaggerItem>
   );
 }
 
 export function About() {
-  const labelRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: labelProgress } = useScroll({
-    target: labelRef,
-    offset: ["start 0.9", "start 0.6"],
-  });
-  const labelOpacity = useTransform(labelProgress, [0, 1], [0, 1]);
-
   return (
     <section id="about" className="py-16 sm:py-24 md:py-32 px-10 sm:px-14 md:px-6 border-t border-border">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-12 gap-12 md:gap-16">
           {/* Label */}
-          <div className="md:col-span-3" ref={labelRef}>
-            <motion.p
-              style={{ opacity: labelOpacity }}
+          <div className="md:col-span-3">
+            <Reveal
+              as="p"
+              y={8}
               className="text-sm font-mono tracking-widest text-muted-foreground uppercase sticky top-24"
             >
               About
-            </motion.p>
+            </Reveal>
           </div>
 
           {/* Content */}
@@ -311,14 +242,11 @@ export function About() {
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
 
-              <motion.a 
+              <Reveal
+                as="a"
                 href="https://www.pucp.edu.pe/"
                 target="_blank"
                 rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
                 className="flex items-center gap-3 sm:gap-4 md:gap-6 pt-6 sm:pt-8 border-t border-border/50 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer"
               >
                 <Image
@@ -332,7 +260,7 @@ export function About() {
                   <p className="text-foreground font-medium break-words">Pontificia Universidad Católica del Perú</p>
                   <p className="text-muted-foreground mt-1">Computer Science</p>
                 </div>
-              </motion.a>
+              </Reveal>
             </div>
 
             {/* Skills */}

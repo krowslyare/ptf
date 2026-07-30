@@ -19,16 +19,19 @@ export function TracingBeam({ children }: { children: React.ReactNode }) {
     { stiffness: 60, damping: 20 }
   );
 
+  // Measuring once on mount left the beam scaled to a stale height: web fonts
+  // land after first paint and reflow the content below them. A ResizeObserver
+  // tracks the real height through font swaps and any later layout change.
   useEffect(() => {
-    const updateHeight = () => {
-      if (contentRef.current) {
-        setSvgHeight(contentRef.current.offsetHeight);
-      }
-    };
-    
-    updateHeight();
-    window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
+    const content = contentRef.current;
+    if (!content) return;
+
+    const observer = new ResizeObserver(([entry]) => {
+      setSvgHeight(entry.contentRect.height);
+    });
+
+    observer.observe(content);
+    return () => observer.disconnect();
   }, []);
 
   return (

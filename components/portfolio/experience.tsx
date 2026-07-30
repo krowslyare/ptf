@@ -1,8 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { TextReveal } from "./text-reveal";
+import { Reveal, Stagger, StaggerItem } from "./reveal";
 
 const experienceSections = [
   {
@@ -142,32 +140,14 @@ type Experience = (typeof experienceSections)[number]["experiences"][number] & {
 
 interface ExperienceCardProps {
   exp: Experience;
-  index: number;
 }
 
 function ExperienceCard({ exp }: ExperienceCardProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.9", "start 0.4"],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 50, damping: 20 });
-  const opacity = useTransform(smoothProgress, [0, 0.5], [0, 1]);
-  const y = useTransform(smoothProgress, [0, 0.5], [50, 0]);
-
   return (
-    <motion.div
-      ref={ref}
-      style={{ opacity, y }}
-    >
+    <Reveal y={24}>
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
         <div>
-          <TextReveal
-            text={exp.company}
-            className="font-serif text-2xl"
-            as="h3"
-          />
+          <h3 className="font-serif text-2xl">{exp.company}</h3>
           {'subtitle' in exp && exp.subtitle && (
             <p className="text-muted-foreground">{exp.subtitle}</p>
           )}
@@ -181,18 +161,13 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
         </p>
       </div>
 
-      <div className="space-y-6 border-l border-border pl-6">
-        {exp.roles.map((role, roleIndex) => (
-          <RoleItem 
-            key={role.title} 
-            role={role} 
-            parentProgress={scrollYProgress}
-            index={roleIndex}
-          />
+      <Stagger className="space-y-6 border-l border-border pl-6" stagger={0.12} delay={0.1}>
+        {exp.roles.map((role) => (
+          <RoleItem key={role.title} role={role} />
         ))}
 
         {exp.showcase && (
-          <div className="pt-4">
+          <StaggerItem className="pt-4">
             <p className="text-[10px] font-mono tracking-widest uppercase text-muted-foreground/50 mb-3">
               Live
             </p>
@@ -220,10 +195,10 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
                 </a>
               ))}
             </div>
-          </div>
+          </StaggerItem>
         )}
-      </div>
-    </motion.div>
+      </Stagger>
+    </Reveal>
   );
 }
 
@@ -235,18 +210,11 @@ interface Role {
 
 interface RoleItemProps {
   role: Role;
-  parentProgress: ReturnType<typeof useScroll>["scrollYProgress"];
-  index: number;
 }
 
-function RoleItem({ role, parentProgress, index }: RoleItemProps) {
-  const smoothProgress = useSpring(parentProgress, { stiffness: 50, damping: 20 });
-  const start = 0.2 + index * 0.15;
-  const opacity = useTransform(smoothProgress, [start, start + 0.3], [0, 1]);
-  const x = useTransform(smoothProgress, [start, start + 0.3], [-20, 0]);
-
+function RoleItem({ role }: RoleItemProps) {
   return (
-    <motion.div style={{ opacity, x }}>
+    <StaggerItem>
       <div className="flex items-center gap-3 mb-3">
         <h4 className="font-medium">{role.title}</h4>
         {role.level && (
@@ -266,30 +234,24 @@ function RoleItem({ role, parentProgress, index }: RoleItemProps) {
           </li>
         ))}
       </ul>
-    </motion.div>
+    </StaggerItem>
   );
 }
 
 export function Experience() {
-  const labelRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: labelProgress } = useScroll({
-    target: labelRef,
-    offset: ["start 0.9", "start 0.6"],
-  });
-  const labelOpacity = useTransform(labelProgress, [0, 1], [0, 1]);
-
   return (
     <section id="experience" className="py-16 sm:py-24 md:py-32 px-10 sm:px-14 md:px-6 bg-secondary/30">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-12 gap-12 md:gap-16">
           {/* Label */}
-          <div className="md:col-span-3" ref={labelRef}>
-            <motion.p
-              style={{ opacity: labelOpacity }}
+          <div className="md:col-span-3">
+            <Reveal
+              as="p"
+              y={8}
               className="text-sm font-mono tracking-widest text-muted-foreground uppercase sticky top-24"
             >
               Experience
-            </motion.p>
+            </Reveal>
           </div>
 
           {/* Content */}
@@ -307,8 +269,8 @@ export function Experience() {
                 </div>
                 
                 <div className="space-y-16">
-                  {section.experiences.map((exp, index) => (
-                    <ExperienceCard key={exp.company} exp={exp} index={index} />
+                  {section.experiences.map((exp) => (
+                    <ExperienceCard key={exp.company} exp={exp} />
                   ))}
                 </div>
               </div>

@@ -1,50 +1,35 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Reveal } from "./reveal";
 import { TextReveal } from "./text-reveal";
 
 export function Contact() {
   const [showModal, setShowModal] = useState(false);
   const [copied, setCopied] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start 0.8", "start 0.2"],
-  });
-
   const handleCopy = () => {
     navigator.clipboard.writeText("htoyama.dev@gmail.com");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const labelRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: labelProgress } = useScroll({
-    target: labelRef,
-    offset: ["start 0.9", "start 0.6"],
-  });
-  const labelOpacity = useTransform(labelProgress, [0, 1], [0, 1]);
-
-  const ctaOpacity = useTransform(scrollYProgress, [0.3, 0.5], [0, 1]);
-  const ctaY = useTransform(scrollYProgress, [0.3, 0.5], [20, 0]);
-
   return (
     <section
-      ref={sectionRef}
       id="contact"
       className="py-16 sm:py-24 md:py-32 px-10 sm:px-14 md:px-6 bg-foreground text-background"
     >
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-12 gap-12 md:gap-16">
           {/* Label */}
-          <div className="md:col-span-3" ref={labelRef}>
-            <motion.p
-              style={{ opacity: labelOpacity }}
+          <div className="md:col-span-3">
+            <Reveal
+              as="p"
+              y={8}
               className="text-sm font-mono tracking-widest text-background/50 uppercase sticky top-24"
             >
               Contact
-            </motion.p>
+            </Reveal>
           </div>
 
           {/* Content */}
@@ -58,10 +43,7 @@ export function Contact() {
             </div>
 
             {/* CTA */}
-            <motion.div
-              style={{ opacity: ctaOpacity, y: ctaY }}
-              className="flex gap-4"
-            >
+            <Reveal className="flex gap-4" delay={0.15}>
               <a
                 href="https://wa.me/51982104435"
                 target="_blank"
@@ -102,7 +84,7 @@ export function Contact() {
                   Email
                 </span>
               </button>
-            </motion.div>
+            </Reveal>
           </div>
         </div>
       </div>
