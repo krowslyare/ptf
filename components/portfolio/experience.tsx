@@ -43,25 +43,53 @@ const experienceSections = [
             name: "KuroGrid",
             href: "https://kurogrid.com",
             logo: "/kurogrid logo.png",
+            // logo ships with its own dark background
+            imgClass: "",
+          },
+          {
+            name: "Ezcuadro",
+            href: "https://www.ezcuadro.com",
+            logo: "/ezcuadro.png",
+            // dark wordmark: flip it so it reads on the dark theme
+            imgClass: "dark:invert",
+          },
+          {
+            name: "VRD",
+            href: "https://vrdmincon.com.pe",
+            logo: "/vrd.png",
+            imgClass: "",
+          },
+          {
+            name: "SMVA",
+            href: "https://smva.com.pe",
+            logo: "/smva.png",
+            // white line art: flip it so it reads on the light theme
+            imgClass: "invert dark:invert-0",
+          },
+          {
+            name: "Pokorb",
+            href: "https://pokorb.com",
+            logo: "/pokorb.png",
+            imgClass: "",
           },
         ],
         roles: [
           {
             title: "Full-Stack Developer",
             tasks: [
-              "Development of full-stack web applications with authentication, database design, and cloud storage integration using Next.js and Supabase.",
-              "Implementation of ERP systems for inventory management with real-time tracking, warehouse operations, and Excel reporting.",
-              "Database architecture with PostgreSQL: Row Level Security (RLS), state management, and storage policies.",
-              "API development with Next.js route handlers, data validation with Zod, and form handling with React Hook Form.",
+              "Design and delivery of multi-tenant web systems on Next.js and Supabase: data model, authentication, roles, and tenant isolation enforced through PostgreSQL Row Level Security.",
+              "Inventory ERP for a mining contractor: transactional kardex computed atomically in the database, multi-warehouse stock, and Excel import/export.",
+              "Architecture organized by business domain, keeping domain rules independent from framework and UI so modules can be added without touching the rest.",
+              "Automated testing with Playwright and Vitest, plus Sentry monitoring, as a gate before every production deploy.",
             ],
           },
           {
             title: "Web Developer",
             tasks: [
-              "Design and development of responsive landing pages focused on conversion and user experience.",
-              "End-to-end project ownership: domain setup, hosting configuration, deployment, and performance optimization.",
-              "Management of cloud/hosting environments, DNS configuration, and service integrations.",
-              "Implementation of contact systems, notifications, and ongoing maintenance.",
+              "Corporate sites and storefronts built for SEO and conversion, with copy and data centralized so clients can update content without touching components.",
+              "End-to-end project ownership: domain registration, DNS, hosting, deployment pipelines, analytics, and ongoing maintenance.",
+              "Peruvian regulatory compliance across client sites: Libro de Reclamaciones, privacy policy, and terms of service.",
+              "Lead capture and WhatsApp-based checkout flows, matching how the clients were already selling.",
             ],
           },
         ],
@@ -108,6 +136,7 @@ type Experience = (typeof experienceSections)[number]["experiences"][number] & {
     name: string;
     href: string;
     logo?: string;
+    imgClass?: string;
   }[];
 };
 
@@ -164,6 +193,9 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
 
         {exp.showcase && (
           <div className="pt-4">
+            <p className="text-[10px] font-mono tracking-widest uppercase text-muted-foreground/50 mb-3">
+              Live
+            </p>
             <div className="flex flex-wrap gap-3">
               {exp.showcase.map((project) => (
                 <a
@@ -178,7 +210,7 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
                     <img
                       src={project.logo}
                       alt={project.name}
-                      className="w-full h-full object-contain p-1.5 opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
+                      className={`w-full h-full object-contain p-1.5 opacity-50 grayscale group-hover:opacity-100 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300 ${project.imgClass ?? ""}`}
                     />
                   ) : (
                     <span className="text-[10px] font-mono tracking-widest text-muted-foreground/70 uppercase group-hover:text-foreground transition-colors duration-300">

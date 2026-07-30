@@ -303,14 +303,14 @@ export function Hero() {
               transition={{ duration: 0.3 }}
               className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed font-light"
             >
-              <TypewriterText 
-                text="I build full-stack applications, data pipelines, and cloud systems." 
+              <TypewriterText
+                text="I build web systems end to end — database, app, deploy, maintenance."
                 speed={20}
               />
               <br />
-              <TypewriterText 
-                text="Specialized in Next.js, PostgreSQL, Azure, and cloud architectures." 
-                delay={1400}
+              <TypewriterText
+                text="Client portals, an inventory ERP, and data pipelines. All in production."
+                delay={1600}
                 speed={20}
                 onComplete={() => setShowCTA(true)}
               />
@@ -370,7 +370,7 @@ export function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 3, duration: 1 }}
       >
-        v.2025
+        v.2026
       </motion.div>
     </section>
   );

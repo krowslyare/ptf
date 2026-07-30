@@ -24,18 +24,27 @@ const skills = {
   webBackend: [
     "Next.js",
     "React",
+    "Vite",
     "Node.js",
     "REST APIs",
     "Spring Boot",
     "Microservices"
   ],
+  databases: [
+    "PostgreSQL",
+    "Supabase",
+    "Row Level Security",
+    "Firebase",
+    "Data Modeling",
+    "SQL Migrations"
+  ],
   cloudData: [
     "Azure",
     "GCP",
+    "Microsoft Fabric",
     "BigQuery",
     "Databricks",
-    "ETL Pipelines",
-    "Data Modeling"
+    "ETL Pipelines"
   ],
   tools: [
     "Git",
@@ -43,6 +52,7 @@ const skills = {
     "Airflow",
     "dbt",
     "Playwright",
+    "Sentry",
     "Power BI",
     "Vercel"
   ]
@@ -93,6 +103,7 @@ function SkillsSection() {
     languages: "Languages",
     aiLLMs: "AI & LLMs",
     webBackend: "Web & Backend",
+    databases: "Databases",
     cloudData: "Cloud & Data",
     tools: "Tools",
   };
@@ -288,15 +299,15 @@ export function About() {
             {/* Bio */}
             <div className="space-y-4 sm:space-y-6">
               <ParagraphReveal
-                text="I like building things: software, data pipelines, interfaces, websites, and cloud services—both for work and personal projects."
+                text="I work across backend, frontend, data, and infrastructure. In practice that means I usually end up owning a project from the database schema to the domain it runs on—which is what the teams I work with actually need."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
               <ParagraphReveal
-                text="I've worked across backend, frontend, data, and infrastructure—adapting to whatever each project needs. On the side, I experiment and learn by self-hosting servers and services, which has given me solid hands-on understanding of how things actually work in production."
+                text="At EY I worked on ETL pipelines and financial data analysis for forensic audits, plus a Spring Boot microservice for authentication and access control. On my own I build and maintain web systems for businesses in Peru: a multi-tenant client portal, an inventory ERP for a mining contractor, and the sites in front of them."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
               <ParagraphReveal
-                text="I prefer building and shipping over talking about work."
+                text="Most of what I know about production I learned self-hosting: VMs, containers, DNS, backups, and the migrations that go wrong at 2am."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
 

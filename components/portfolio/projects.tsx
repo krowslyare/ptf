@@ -4,12 +4,12 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ParagraphReveal } from "./text-reveal";
 
-const professionalProjects = [
+const enterpriseProjects = [
   {
     title: "Data Engineering Pipeline",
     subtitle: "Azure Dataflow Gen2",
     description:
-      "Design and implementation of a data pipeline for ingestion and transformation of orders stored in Azure Data Lake. ETL flow orchestration using Dataflow Gen2, replicating Alteryx-style processes for specific client requirements.",
+      "Data pipeline for ingestion and transformation of orders stored in Azure Data Lake. ETL orchestration with Dataflow Gen2, replicating Alteryx-style processes required by the client.",
     technologies: [
       "Azure Data Lake",
       "Microsoft Fabric Dataflow Gen2",
@@ -21,14 +21,14 @@ const professionalProjects = [
     title: "Data Flow Modernization",
     subtitle: "Databricks",
     description:
-      "Migration of complex data flows to Databricks Notebooks using PySpark. Participation in design, testing, and execution of process orchestration through Databricks Jobs.",
+      "Migration of legacy data flows to Databricks notebooks using PySpark, and orchestration of the resulting processes through Databricks Jobs. Involved in design, testing, and rollout.",
     technologies: ["Databricks", "PySpark", "Databricks Jobs"],
   },
   {
     title: "User Management Microservice",
     subtitle: "Azure",
     description:
-      "Development of a REST microservice in Java/Spring Boot for user, role, and permission management. Implementation of access control and authorization validations at API level. Integration with notification services for user-related events.",
+      "REST microservice in Java/Spring Boot for users, roles, and permissions. Access control and authorization checks enforced at the API layer, with integration into notification services for user events.",
     technologies: [
       "Java",
       "Spring Boot",
@@ -39,65 +39,127 @@ const professionalProjects = [
   },
 ];
 
-const personalProjects = [
+const clientProjects = [
   {
-    title: "Kurogrid Client Portal",
-    subtitle: "Next.js + Supabase",
+    title: "Kurogrid Portal",
+    subtitle: "Multi-tenant client portal · Next.js + Supabase",
     description:
-      "Full-stack client onboarding portal with authentication, project state management, and file uploads. Features multi-step forms with draft/submitted/locked states, PostgreSQL database with Row Level Security (RLS), and cloud storage integration for client assets.",
+      "The operational backbone of the studio: clients handle billing, support requests and web metrics in one place, while the team runs everything from an admin panel. Organized as sixteen domain modules — billing, analytics, site health, complaints book, change requests, leads, reports, internal finance — each split into pure domain logic, server access, and UI. Tenant isolation enforced in PostgreSQL with Row Level Security; Playwright smoke tests gate every deploy.",
     technologies: [
-      "Next.js",
-      "React",
-      "Supabase",
+      "Next.js 16",
       "TypeScript",
-      "Tailwind CSS",
-      "Framer Motion",
+      "Supabase",
       "PostgreSQL",
+      "Row Level Security",
+      "Tailwind v4",
+      "Playwright",
+      "Sentry",
     ],
-    github: "",
     demo: "https://portal.kurogrid.com",
   },
   {
-    title: "Pokorb E-Commerce Platform",
-    subtitle: "Next.js + WhatsApp Integration",
+    title: "Kurogrid",
+    subtitle: "Studio site · Next.js",
     description:
-      "Pseudo e-commerce platform for artisan products with catalog browsing, shopping cart, and WhatsApp checkout integration. Features a complaints book (Libro de Reclamaciones) for customer service compliance, product filtering, and direct messaging for order placement. Built with responsive design and optimized for conversion.",
+      "Public site for the studio: service pages, MDX-driven blog, and interactive product demos built with React Three Fiber. Leads are captured into Supabase with UTM attribution carried through to the portal, and a per-tenant complaints book API serves the client sites that need one.",
     technologies: [
       "Next.js",
-      "React",
       "TypeScript",
-      "Tailwind CSS",
-      "WhatsApp Business API",
+      "React Three Fiber",
+      "MDX",
+      "Supabase",
       "Framer Motion",
+      "Vitest",
     ],
-    github: "",
-    demo: "https://pokorb.com",
+    demo: "https://kurogrid.com",
   },
   {
-    title: "VRD Inventory Management System",
-    subtitle: "ERP Web Application",
+    title: "VRD Inventory ERP",
+    subtitle: "Industrial B2B system · Next.js + Supabase",
     description:
-      "Enterprise Resource Planning system for inventory management with real-time stock tracking, warehouse operations, and movement history. Implements ingreso/salida workflows with database-driven validation, cost freezing, and posting logic. Features authenticated inventory areas, API routes for movements, and Excel export capabilities.",
+      "Inventory and logistics system for a mining contractor. Multi-warehouse stock with a transactional kardex: balances and costs are computed atomically in the database, so concurrent movements can't drift. Built around fast data entry — dense tables, keyboard-first flows, Excel import and export — over 80 SQL migrations and roles hardened with RLS.",
     technologies: [
       "Next.js",
       "Supabase",
+      "PostgreSQL",
       "TypeScript",
-      "React Hook Form",
       "Zod",
       "TanStack Table",
-      "Recharts",
       "ExcelJS",
       "Playwright",
       "Sentry",
     ],
-    github: "",
     demo: "https://portal.vrdmincon.com.pe",
   },
+  {
+    title: "VRD Corporate Site",
+    subtitle: "Static site · Next.js 16",
+    description:
+      "Institutional site for the same contractor, deployed separately from the ERP so neither can take the other down. Fully static for SEO, with every text, service, KPI and image centralized in a single content file the client's team can edit without touching components.",
+    technologies: ["Next.js 16", "React 19", "Tailwind v4", "GSAP", "Three.js"],
+    demo: "https://vrdmincon.com.pe",
+  },
+  {
+    title: "Ezcuadro",
+    subtitle: "Custom canvas prints · Next.js + Firebase",
+    description:
+      "Storefront for a made-to-order canvas printing business in Lima. Quote builder with real-time size and price comparison, filterable catalog, blog, and a Peruvian complaints book for regulatory compliance. Orders close over WhatsApp, which is how the business already sold.",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Firebase",
+      "GSAP",
+      "Lenis",
+      "Leaflet",
+    ],
+    demo: "https://www.ezcuadro.com",
+  },
+  {
+    title: "Ezcuadro Backoffice",
+    subtitle: "Admin consolidation · Vite + React",
+    description:
+      "The store's internal tools had grown into eight isolated pages, each with its own login form and its own diverging CSS — and every admin deploy risked the public site. I pulled them out into a single SPA with one auth provider, role-based route guards, and one set of design tokens. The storefront and the panel now ship independently.",
+    technologies: [
+      "Vite",
+      "React",
+      "TypeScript",
+      "React Router",
+      "Firebase Auth",
+      "Leaflet",
+    ],
+    github: "https://github.com/krowslyare/ezcuadro_portal",
+    demo: "https://portal.ezcuadro.com",
+  },
+  {
+    title: "SMVA",
+    subtitle: "Corporate landing · Next.js",
+    description:
+      "Site for a mining contractor registered with Peru's Ministry of Energy and Mines. Service and capability pages aimed at procurement teams evaluating suppliers, with contact routing as the single conversion goal.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Lenis"],
+    demo: "https://smva.com.pe",
+  },
+  {
+    title: "Pokorb",
+    subtitle: "Catalog commerce · React + WhatsApp",
+    description:
+      "Catalog and cart for artisan products where checkout hands off to WhatsApp instead of a payment gateway — the flow the client's customers already used. Includes product filtering, a complaints book, and 3D scene work in the landing.",
+    technologies: [
+      "React",
+      "Three.js",
+      "GSAP",
+      "Lenis",
+      "WhatsApp Business",
+    ],
+    demo: "https://pokorb.com",
+  },
+];
+
+const personalProjects = [
   {
     title: "Self-Hosted Cloud Infrastructure",
     subtitle: "Google Cloud Platform",
     description:
-      "Provisioning and management of Linux VMs on GCP for self-hosted services. Configuration of firewall rules, SSH access, and networking. Containerized deployments using Docker, integration with Cloud Storage buckets, and execution of service migrations between environments.",
+      "Linux VMs on GCP running my own services: firewall rules, SSH access and networking configured by hand, containerized deploys with Docker, Cloud Storage buckets, and a few migrations between environments. Most of what I know about production came from breaking this first.",
     technologies: [
       "GCP Compute Engine",
       "Linux",
@@ -119,6 +181,30 @@ type Project = {
   demo?: string;
   confidential?: boolean;
 };
+
+const projectGroups: {
+  title: string;
+  blurb: string;
+  projects: Project[];
+  confidential?: boolean;
+}[] = [
+  {
+    title: "Enterprise",
+    blurb: "Delivered inside a consulting firm. Code stays with the client.",
+    projects: enterpriseProjects,
+    confidential: true,
+  },
+  {
+    title: "Client Work",
+    blurb: "Systems I designed, shipped and still maintain. All live in production.",
+    projects: clientProjects,
+  },
+  {
+    title: "Personal",
+    blurb: "Infrastructure I run for myself, mostly to learn how things break.",
+    projects: personalProjects,
+  },
+];
 
 interface ProjectCardProps {
   project: Project;
@@ -292,51 +378,37 @@ export function Projects() {
 
           {/* Content */}
           <div className="md:col-span-9 space-y-20">
-            {/* Professional Projects */}
-            <div className="space-y-8">
-              <div className="space-y-2">
-                <div className="flex items-center gap-6 mb-2">
-                  <div className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary/40" />
-                    <h2 className="font-mono text-sm tracking-[0.2em] uppercase text-muted-foreground">
-                      Professional
-                    </h2>
+            {projectGroups.map((group) => (
+              <div key={group.title} className="space-y-8">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-6 mb-2">
+                    <div className="flex items-center gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary/40" />
+                      <h2 className="font-mono text-sm tracking-[0.2em] uppercase text-muted-foreground">
+                        {group.title}
+                      </h2>
+                    </div>
+                    <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
                   </div>
-                  <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
+                  <p className="text-xs text-muted-foreground/60 font-mono ml-4">
+                    {group.blurb}
+                  </p>
                 </div>
-                <p className="text-xs text-muted-foreground/60 font-mono ml-4">
-                  Enterprise and client work delivered in consulting environments.
-                </p>
-              </div>
-              <div className="space-y-8">
-                {professionalProjects.map((project, index) => (
-                  <ProjectCard key={project.title} project={{...project, confidential: true}} index={index} />
-                ))}
-              </div>
-            </div>
-
-            {/* Personal Projects */}
-            <div className="space-y-8">
-              <div className="space-y-2">
-                <div className="flex items-center gap-6 mb-2">
-                  <div className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary/40" />
-                    <h2 className="font-mono text-sm tracking-[0.2em] uppercase text-muted-foreground">
-                      Personal
-                    </h2>
-                  </div>
-                  <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
+                <div className="space-y-8">
+                  {group.projects.map((project, index) => (
+                    <ProjectCard
+                      key={project.title}
+                      project={
+                        group.confidential
+                          ? { ...project, confidential: true }
+                          : project
+                      }
+                      index={index}
+                    />
+                  ))}
                 </div>
-                <p className="text-xs text-muted-foreground/60 font-mono ml-4">
-                  Independent builds, experiments, and self-hosted infrastructure.
-                </p>
               </div>
-              <div className="space-y-8">
-                {personalProjects.map((project, index) => (
-                  <ProjectCard key={project.title} project={project} index={index} />
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

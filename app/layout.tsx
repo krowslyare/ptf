@@ -22,9 +22,8 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Hideki Toyama | Data Engineer & Software Developer',
-  description: 'Portfolio de Hideki Toyama - Ingeniero en Informática especializado en Data Engineering y Desarrollo de Software',
-  generator: 'v0.app',
+  title: 'Hideki Toyama | Software & Data Engineer',
+  description: 'Software and data engineer based in Lima, Peru. I build web systems end to end: client portals, inventory ERPs, and data pipelines running in production.',
   icons: {
     icon: [
       {
