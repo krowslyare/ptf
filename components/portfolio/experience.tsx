@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal, Stagger, StaggerItem } from "./reveal";
+import { SectionLabel } from "./section-label";
 
 const experienceSections = [
   {
@@ -240,18 +241,12 @@ function RoleItem({ role }: RoleItemProps) {
 
 export function Experience() {
   return (
-    <section id="experience" className="py-16 sm:py-24 md:py-32 px-10 sm:px-14 md:px-6 bg-secondary/30">
-      <div className="max-w-6xl mx-auto">
+    <section id="experience" className="border-t border-border bg-secondary/30 py-24 sm:py-32 md:py-40">
+      <div className="mx-auto max-w-[1600px] px-6 sm:px-10 md:px-16 lg:px-24">
         <div className="grid md:grid-cols-12 gap-12 md:gap-16">
           {/* Label */}
           <div className="md:col-span-3">
-            <Reveal
-              as="p"
-              y={8}
-              className="text-sm font-mono tracking-widest text-muted-foreground uppercase sticky top-24"
-            >
-              Experience
-            </Reveal>
+            <SectionLabel index="02" title="Experience" kana="ショクレキ" />
           </div>
 
           {/* Content */}
@@ -260,7 +255,7 @@ export function Experience() {
               <div key={section.title} className="relative">
                 <div className="flex items-center gap-6 mb-12">
                   <div className="flex items-center gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary/40" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-brand" />
                     <h2 className="font-mono text-sm tracking-[0.2em] uppercase text-muted-foreground">
                       {section.title}
                     </h2>

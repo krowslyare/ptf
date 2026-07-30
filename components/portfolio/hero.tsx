@@ -1,412 +1,251 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { CharCascade, ScrambleText, WordFade } from "./decode-text";
+import { Kana } from "./kana";
 
-// Typewriter effect with blinking cursor
-function TypewriterText({ 
-  text, 
-  delay = 0,
-  speed = 50,
-  className = "",
-  onComplete
-}: { 
-  text: string; 
-  delay?: number;
-  speed?: number;
-  className?: string;
-  onComplete?: () => void;
-}) {
-  const [displayed, setDisplayed] = useState("");
-  const [showCursor, setShowCursor] = useState(true);
-  const [isTyping, setIsTyping] = useState(false);
-  const reduced = useReducedMotion();
+/**
+ * 黒 — the hero is built as a technical drawing: a strict hairline grid, type
+ * set large enough to break it, and one accent colour used sparingly enough
+ * that it still reads as an accent.
+ */
 
-  // Held in a ref so it stays out of the effect's dependencies. Call sites pass
-  // inline arrows, and those change identity on every render: with onComplete
-  // in the deps, the effect re-ran the moment its own callback set state, and
-  // the line typed itself a second time.
-  const onCompleteRef = useRef(onComplete);
-  useEffect(() => {
-    onCompleteRef.current = onComplete;
-  });
-
-  useEffect(() => {
-    if (reduced) {
-      setDisplayed(text);
-      onCompleteRef.current?.();
-      return;
-    }
-
-    let interval: ReturnType<typeof setInterval> | undefined;
-
-    const startTimeout = setTimeout(() => {
-      setIsTyping(true);
-      let i = 0;
-      interval = setInterval(() => {
-        if (i < text.length) {
-          setDisplayed(text.slice(0, i + 1));
-          i++;
-        } else {
-          clearInterval(interval);
-          setIsTyping(false);
-          onCompleteRef.current?.();
-        }
-      }, speed);
-    }, delay);
-
-    // The previous cleanup for this interval was returned from inside the
-    // setTimeout callback, where React never saw it, so it leaked on unmount.
-    return () => {
-      clearTimeout(startTimeout);
-      clearInterval(interval);
-    };
-  }, [text, delay, speed, reduced]);
-
-  // Cursor blink
-  useEffect(() => {
-    if (reduced) return;
-    const cursorInterval = setInterval(() => {
-      setShowCursor(prev => !prev);
-    }, 530);
-    return () => clearInterval(cursorInterval);
-  }, [reduced]);
-
-  return (
-    <span className={className}>
-      {displayed}
-      <span 
-        className={`inline-block w-[2px] h-[1em] bg-foreground ml-1 align-middle ${
-          showCursor && isTyping ? 'opacity-100' : 'opacity-0'
-        } transition-opacity duration-100`}
-      />
-    </span>
-  );
-}
-
-// Glitch text effect - occasional distortion
-function GlitchText({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const [isGlitching, setIsGlitching] = useState(false);
-  const [glitchOffset, setGlitchOffset] = useState({ x: 0, y: 0 });
-  const reduced = useReducedMotion();
-
-  useEffect(() => {
-    if (reduced) return;
-
-    // Each cycle schedules the next one, so the pending id has to be tracked
-    // across cycles: clearing only the first timeout left the chain running
-    // after unmount.
-    let nextTimeout: ReturnType<typeof setTimeout>;
-    let resetTimeout: ReturnType<typeof setTimeout>;
-
-    const triggerGlitch = () => {
-      setIsGlitching(true);
-      setGlitchOffset({
-        x: (Math.random() - 0.5) * 4,
-        y: (Math.random() - 0.5) * 2,
-      });
-
-      resetTimeout = setTimeout(() => {
-        setIsGlitching(false);
-        setGlitchOffset({ x: 0, y: 0 });
-      }, 100 + Math.random() * 100);
-    };
-
-    // Random glitch every 3-8 seconds
-    const scheduleGlitch = () => {
-      nextTimeout = setTimeout(() => {
-        triggerGlitch();
-        scheduleGlitch();
-      }, 3000 + Math.random() * 5000);
-    };
-
-    scheduleGlitch();
-    return () => {
-      clearTimeout(nextTimeout);
-      clearTimeout(resetTimeout);
-    };
-  }, [reduced]);
-
-  return (
-    <span className={`relative inline-block ${className}`}>
-      {/* Main text */}
-      <span className="relative z-10">{children}</span>
-      
-      {/* Glitch layers */}
-      {isGlitching && (
-        <>
-          <span 
-            className="absolute inset-0 text-foreground/80 z-0"
-            style={{ 
-              transform: `translate(${glitchOffset.x}px, ${glitchOffset.y}px)`,
-              clipPath: 'polygon(0 0, 100% 0, 100% 45%, 0 45%)',
-            }}
-          >
-            {children}
-          </span>
-          <span 
-            className="absolute inset-0 text-foreground/60 z-0"
-            style={{ 
-              transform: `translate(${-glitchOffset.x}px, ${-glitchOffset.y}px)`,
-              clipPath: 'polygon(0 55%, 100% 55%, 100% 100%, 0 100%)',
-            }}
-          >
-            {children}
-          </span>
-        </>
-      )}
-    </span>
-  );
-}
-
-// Scan lines overlay
-function ScanLines() {
-  return (
-    <div 
-      className="absolute inset-0 pointer-events-none z-20 opacity-[0.03]"
-      style={{
-        backgroundImage: `repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 2px,
-          currentColor 2px,
-          currentColor 4px
-        )`,
-        backgroundSize: '100% 4px',
-      }}
-    />
-  );
-}
-
-// Noise grain texture
-function NoiseGrain() {
-  return (
-    <div 
-      className="absolute inset-0 pointer-events-none z-10 opacity-[0.02] mix-blend-overlay"
-      style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-      }}
-    />
-  );
-}
-
-// Terminal-style status line
 function StatusLine() {
-  const [time, setTime] = useState("");
+  const [time, setTime] = useState("--:--:--");
 
   useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setTime(now.toLocaleTimeString('en-US', { hour12: false }));
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
+    const update = () =>
+      setTime(
+        new Date().toLocaleTimeString("en-GB", {
+          hour12: false,
+          timeZone: "America/Lima",
+        })
+      );
+    update();
+    const interval = setInterval(update, 1000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="font-mono text-[10px] tracking-widest text-muted-foreground/60 flex items-center gap-2 sm:gap-4 flex-wrap">
-      <span className="hidden sm:inline">SYS.ACTIVE</span>
-      <span className="hidden sm:inline w-px h-3 bg-muted-foreground/30" />
-      <span>{time}</span>
-      <span className="w-px h-3 bg-muted-foreground/30" />
-      <span>LIMA, PE</span>
+    <div className="flex items-center gap-3 sm:gap-5 font-mono text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
+      <span className="flex items-center gap-2">
+        <span className="relative flex h-1.5 w-1.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-60" />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand" />
+        </span>
+        <span className="hidden sm:inline">Available</span>
+      </span>
+      <span className="h-3 w-px bg-border" />
+      <span className="tabular-nums">{time}</span>
+      <span className="h-3 w-px bg-border" />
+      <span>Lima, PE</span>
     </div>
   );
 }
 
-// Animated border frame
-function BorderFrame() {
+/** Corner ticks, as on a cut sheet. */
+function CornerTicks() {
+  const corners = [
+    "top-0 left-0 border-t border-l",
+    "top-0 right-0 border-t border-r",
+    "bottom-0 left-0 border-b border-l",
+    "bottom-0 right-0 border-b border-r",
+  ];
+
   return (
-    <div className="absolute inset-4 sm:inset-8 md:inset-12 lg:inset-16 pointer-events-none">
-      {/* Corner marks */}
-      <div className="absolute top-0 left-0 w-8 h-8">
-        <div className="absolute top-0 left-0 w-full h-px bg-foreground/20" />
-        <div className="absolute top-0 left-0 w-px h-full bg-foreground/20" />
-      </div>
-      <div className="absolute top-0 right-0 w-8 h-8">
-        <div className="absolute top-0 right-0 w-full h-px bg-foreground/20" />
-        <div className="absolute top-0 right-0 w-px h-full bg-foreground/20" />
-      </div>
-      <div className="absolute bottom-0 left-0 w-8 h-8">
-        <div className="absolute bottom-0 left-0 w-full h-px bg-foreground/20" />
-        <div className="absolute bottom-0 left-0 w-px h-full bg-foreground/20" />
-      </div>
-      <div className="absolute bottom-0 right-0 w-8 h-8">
-        <div className="absolute bottom-0 right-0 w-full h-px bg-foreground/20" />
-        <div className="absolute bottom-0 right-0 w-px h-full bg-foreground/20" />
-      </div>
+    <div className="pointer-events-none absolute inset-0">
+      {corners.map((position) => (
+        <span
+          key={position}
+          className={`absolute h-4 w-4 border-foreground/25 ${position}`}
+        />
+      ))}
     </div>
+  );
+}
+
+function Grain() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 z-20 opacity-[0.035] mix-blend-overlay"
+      style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+      }}
+    />
   );
 }
 
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [showSubtitle, setShowSubtitle] = useState(false);
-  const [showDescription, setShowDescription] = useState(false);
-  const [showCTA, setShowCTA] = useState(false);
+  const containerRef = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+  const [stage, setStage] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.5], ["0%", "10%"]);
-
-  const handleTitleComplete = useCallback(() => {
-    setShowSubtitle(true);
-  }, []);
-
-  const handleSubtitleComplete = useCallback(() => {
-    setShowDescription(true);
-  }, []);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
 
   return (
-    <section 
+    <section
       ref={containerRef}
-      className="min-h-screen flex items-center justify-center px-10 sm:px-14 md:px-6 pt-20 relative overflow-hidden bg-background"
+      id="top"
+      className="relative min-h-screen overflow-hidden border-b border-border bg-background"
     >
-      <ScanLines />
-      <NoiseGrain />
-      <BorderFrame />
+      {/* Engineering grid, drawn in behind everything */}
+      <motion.div
+        aria-hidden="true"
+        className="grid-field absolute inset-0 opacity-[0.5]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.5 }}
+        transition={{ duration: 1.4, ease: "easeOut" }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/70 to-background"
+      />
+      <Grain />
 
-      <motion.div 
-        className="max-w-4xl mx-auto relative z-10"
-        style={{ opacity, y }}
-      >
-        {/* Top status */}
+      {/* Full-height rules that the type deliberately crosses */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 left-[8%] hidden w-px bg-border md:block"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 right-[8%] hidden w-px bg-border lg:block"
+      />
+
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-[1600px] flex-col justify-between px-6 pb-8 pt-24 sm:px-10 md:px-16 lg:px-24">
+        <CornerTicks />
+
+        {/* ── Top rail ─────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="mb-12"
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="flex items-start justify-between gap-6"
         >
           <StatusLine />
+          <span className="hidden font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground sm:block">
+            Portfolio / 2026
+          </span>
         </motion.div>
 
-        {/* Main title */}
-        <div className="mb-6">
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight leading-[0.9]">
-            <GlitchText>
-              <TypewriterText 
-                text="Hideki" 
-                delay={500} 
-                speed={80}
-              />
-            </GlitchText>
-          </h1>
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight leading-[0.9] mt-2">
-            <GlitchText>
-              <TypewriterText 
-                text="Toyama" 
-                delay={1200} 
-                speed={80}
-                onComplete={handleTitleComplete}
-              />
-            </GlitchText>
-          </h1>
-        </div>
-
-        {/* Role subtitle */}
-        <div className="mb-6 sm:mb-8 min-h-[32px]">
-          {showSubtitle && (
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center gap-2 sm:gap-3"
-            >
-              <span className="w-6 sm:w-12 h-px bg-foreground shrink-0" />
-              <span className="font-mono text-[10px] sm:text-xs md:text-sm tracking-[0.15em] sm:tracking-[0.2em] text-muted-foreground uppercase">
-                <TypewriterText 
-                  text="Software & Data Engineer" 
-                  speed={30}
-                  onComplete={handleSubtitleComplete}
-                />
-              </span>
-            </motion.div>
-          )}
-        </div>
-
-        {/* Description */}
-        <div className="mb-8 sm:mb-12 min-h-[60px] sm:min-h-[80px]">
-          {showDescription && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed font-light"
-            >
-              <TypewriterText
-                text="I build web systems end to end — database, app, deploy, maintenance."
-                speed={20}
-              />
-              <br />
-              <TypewriterText
-                text="Client portals, an inventory ERP, and data pipelines. All in production."
-                delay={1600}
-                speed={20}
-                onComplete={() => setShowCTA(true)}
-              />
-            </motion.div>
-          )}
-        </div>
-
-        {/* CTA Buttons */}
-        <div className="min-h-[50px]">
-          {showCTA && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="flex flex-wrap gap-3 sm:gap-4"
-            >
-              <a
-                href="#projects"
-                className="group relative px-4 sm:px-6 py-2.5 sm:py-3 bg-foreground text-background font-mono text-[10px] sm:text-xs tracking-widest uppercase overflow-hidden transition-transform hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <span className="relative z-10">View projects</span>
-              </a>
-              <a
-                href="#contact"
-                className="group px-4 sm:px-6 py-2.5 sm:py-3 border border-foreground/30 text-foreground font-mono text-[10px] sm:text-xs tracking-widest uppercase hover:border-foreground transition-all hover:scale-[1.02] active:scale-[0.98]"
-              >
-                Contact
-              </a>
-            </motion.div>
-          )}
-        </div>
-
-        {/* Scroll indicator */}
+        {/* ── Name ─────────────────────────────────────────── */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: showCTA ? 1 : 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="absolute bottom-[-80px] sm:bottom-[-120px] left-0 hidden sm:block"
+          style={reduced ? undefined : { y: contentY, opacity: contentOpacity }}
+          className="flex flex-1 items-center py-12"
         >
-          <div className="flex items-center gap-3">
-            <motion.div 
-              className="w-px h-16 bg-gradient-to-b from-foreground/50 to-transparent"
-              animate={{ scaleY: [1, 0.7, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <span className="font-mono text-[10px] tracking-widest text-muted-foreground/60 uppercase writing-vertical">
-              scroll
-            </span>
+          <div className="flex w-full items-center gap-6 md:gap-12">
+            <div className="min-w-0 flex-1">
+              <motion.p
+                initial={{ opacity: 0, x: -8 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="mb-5 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-brand sm:text-xs"
+              >
+                <span className="h-px w-8 bg-brand sm:w-14" />
+                Software &amp; Data Engineer
+              </motion.p>
+
+              <h1 className="font-serif font-medium leading-[0.82] tracking-[-0.02em]">
+                <span className="block text-[clamp(3.2rem,15vw,13rem)]">
+                  <CharCascade text="HIDEKI" delay={0.35} stagger={0.045} />
+                </span>
+                <span className="block text-[clamp(3.2rem,15vw,13rem)] text-muted-foreground">
+                  <CharCascade
+                    text="TOYAMA"
+                    delay={0.62}
+                    stagger={0.045}
+                    onDone={() => setStage(1)}
+                  />
+                </span>
+              </h1>
+
+              {/* Rule that draws itself under the name */}
+              <motion.div
+                className="mt-8 h-px origin-left bg-border"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.9, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              />
+
+              <div className="mt-8 grid gap-8 md:grid-cols-[1.4fr_1fr] md:gap-16">
+                <p className="max-w-xl text-balance text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg">
+                  {stage >= 1 && (
+                    <WordFade text="I build web systems end to end — database, app, deploy, maintenance. Client portals, an inventory ERP, and data pipelines. All in production." />
+                  )}
+                </p>
+
+                {/* Counter rail */}
+                <motion.dl
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: stage >= 1 ? 1 : 0 }}
+                  transition={{ duration: 0.5, delay: 0.25 }}
+                  className="flex gap-8 self-start border-l border-border pl-6 font-mono md:gap-10"
+                >
+                  <div>
+                    <dt className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                      Live systems
+                    </dt>
+                    <dd className="mt-1 text-2xl text-brand">08</dd>
+                  </div>
+                  <div>
+                    <dt className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                      Certs
+                    </dt>
+                    <dd className="mt-1 text-2xl">05</dd>
+                  </div>
+                </motion.dl>
+              </div>
+            </div>
+
+            {/* Vertical kana, second axis of the composition */}
+            <motion.div
+              initial={{ opacity: 0, y: -16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.1 }}
+              className="hidden shrink-0 items-center gap-4 self-stretch lg:flex"
+            >
+              <span className="h-full w-px bg-gradient-to-b from-transparent via-border to-transparent" />
+              <Kana
+                text="トヤマ ヒデキ"
+                className="font-serif text-lg tracking-[0.3em] text-muted-foreground/70"
+              />
+            </motion.div>
           </div>
         </motion.div>
-      </motion.div>
 
-      {/* Version mark */}
-      <motion.div 
-        className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 font-mono text-[10px] tracking-widest text-muted-foreground/40"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 3, duration: 1 }}
-      >
-        v.2026
-      </motion.div>
+        {/* ── Bottom rail ──────────────────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: stage >= 1 ? 1 : 0, y: stage >= 1 ? 0 : 12 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+          className="flex flex-col gap-6 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="#projects"
+              className="group relative overflow-hidden border border-brand bg-brand px-6 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-background transition-colors hover:bg-transparent hover:text-brand sm:text-xs"
+            >
+              View projects
+            </a>
+            <a
+              href="#contact"
+              className="border border-border px-6 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground transition-colors hover:border-foreground sm:text-xs"
+            >
+              Contact
+            </a>
+          </div>
+
+          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            <ScrambleText text="scroll to begin" delay={1500} speed={30} />
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }

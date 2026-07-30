@@ -45,7 +45,7 @@ export function TracingBeam({ children }: { children: React.ReactNode }) {
         
         {/* Progress indicator - elegant line fill */}
         <motion.div
-          className="absolute left-0 top-0 w-full bg-gradient-to-b from-primary/80 to-primary/20 via-primary/50"
+          className="absolute left-0 top-0 w-full bg-gradient-to-b from-brand via-brand/50 to-transparent"
           style={{ height: y1 }}
         />
       </div>

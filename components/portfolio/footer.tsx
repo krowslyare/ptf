@@ -2,18 +2,21 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-8 px-10 sm:px-14 md:px-6 border-t border-border">
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-sm text-muted-foreground font-mono">
-          © {currentYear} Hideki Toyama - H.T.
-        </p>
+    <footer className="border-t border-border py-10">
+      <div className="mx-auto flex max-w-[1600px] flex-col items-center justify-between gap-6 px-6 sm:flex-row sm:px-10 md:px-16 lg:px-24">
+        <div className="flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+          <span className="h-1 w-1 rounded-full bg-brand" />
+          <span>© {currentYear} Hideki Toyama</span>
+          <span className="hidden h-3 w-px bg-border sm:block" />
+          <span className="hidden sm:block">Lima, PE</span>
+        </div>
 
         <div className="flex items-center gap-6">
           <a
             href="https://github.com/krowslyare"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground transition-colors"
+            className="text-muted-foreground transition-colors hover:text-brand"
             aria-label="GitHub"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -29,7 +32,7 @@ export function Footer() {
             href="https://www.linkedin.com/in/hideki-toyama"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground transition-colors"
+            className="text-muted-foreground transition-colors hover:text-brand"
             aria-label="LinkedIn"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

@@ -1,6 +1,7 @@
 "use client";
 
 import { Reveal, Stagger, StaggerItem } from "./reveal";
+import { SectionLabel } from "./section-label";
 
 const enterpriseProjects = [
   {
@@ -206,24 +207,28 @@ const projectGroups: {
 
 interface ProjectCardProps {
   project: Project;
+  index: number;
 }
 
-function ProjectCard({ project }: ProjectCardProps) {
+function ProjectCard({ project, index }: ProjectCardProps) {
   return (
     <Reveal
       as="article"
       y={24}
-      className="group p-6 md:p-8 border border-border hover:border-foreground hover:bg-foreground/[0.02] transition-all duration-300 ease-out"
+      className="group relative border border-border p-6 transition-colors duration-300 ease-out hover:border-brand/50 hover:bg-brand-dim md:p-8"
     >
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
-        <div>
-          <h3 className="font-serif text-xl md:text-2xl group-hover:underline decoration-1 underline-offset-4">
+      <div className="mb-5 flex items-start justify-between gap-4">
+        <div className="min-w-0">
+          <h3 className="font-serif text-2xl leading-tight md:text-3xl">
             {project.title}
           </h3>
-          <p className="text-sm font-mono text-muted-foreground mt-1">
+          <p className="mt-2 font-mono text-xs text-muted-foreground sm:text-sm">
             {project.subtitle}
           </p>
         </div>
+        <span className="shrink-0 font-mono text-[10px] tracking-[0.2em] text-muted-foreground/50 transition-colors duration-300 group-hover:text-brand">
+          {String(index + 1).padStart(2, "0")}
+        </span>
       </div>
 
       <p className="text-muted-foreground leading-relaxed mb-6">
@@ -299,7 +304,7 @@ function TechTags({ technologies }: TechTagsProps) {
           as="span"
           y={8}
           duration={0.3}
-          className="px-2 py-1 text-xs font-mono border border-border text-muted-foreground hover:text-foreground hover:border-foreground/50 transition-colors duration-200"
+          className="border border-border px-2 py-1 font-mono text-xs text-muted-foreground transition-colors duration-200 hover:border-brand/60 hover:text-brand"
           whileHover={{ scale: 1.05 }}
         >
           {tech}
@@ -311,18 +316,12 @@ function TechTags({ technologies }: TechTagsProps) {
 
 export function Projects() {
   return (
-    <section id="projects" className="py-16 sm:py-24 md:py-32 px-10 sm:px-14 md:px-6 border-t border-border">
-      <div className="max-w-6xl mx-auto">
+    <section id="projects" className="border-t border-border py-24 sm:py-32 md:py-40">
+      <div className="mx-auto max-w-[1600px] px-6 sm:px-10 md:px-16 lg:px-24">
         <div className="grid md:grid-cols-12 gap-12 md:gap-16">
           {/* Label */}
           <div className="md:col-span-3">
-            <Reveal
-              as="p"
-              y={8}
-              className="text-sm font-mono tracking-widest text-muted-foreground uppercase sticky top-24"
-            >
-              Projects
-            </Reveal>
+            <SectionLabel index="03" title="Projects" kana="サクヒン" />
           </div>
 
           {/* Content */}
@@ -332,21 +331,22 @@ export function Projects() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-6 mb-2">
                     <div className="flex items-center gap-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary/40" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand" />
                       <h2 className="font-mono text-sm tracking-[0.2em] uppercase text-muted-foreground">
                         {group.title}
                       </h2>
                     </div>
                     <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
                   </div>
-                  <p className="text-xs text-muted-foreground/60 font-mono ml-4">
+                  <p className="ml-5 font-mono text-xs text-muted-foreground/70">
                     {group.blurb}
                   </p>
                 </div>
                 <div className="space-y-8">
-                  {group.projects.map((project) => (
+                  {group.projects.map((project, index) => (
                     <ProjectCard
                       key={project.title}
+                      index={index}
                       project={
                         group.confidential
                           ? { ...project, confidential: true }

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Reveal, Stagger, StaggerItem } from "./reveal";
+import { SectionLabel } from "./section-label";
 import { TextReveal, ParagraphReveal } from "./text-reveal";
 
 const skills = {
@@ -176,7 +177,7 @@ function CertificationCard({ cert }: CertificationCardProps) {
       href={cert.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-start justify-between gap-3 p-3 sm:p-4 border border-border hover:border-foreground hover:bg-foreground/[0.02] transition-all duration-300 ease-out block"
+      className="group flex items-start justify-between gap-3 border border-border p-3 transition-colors duration-300 ease-out hover:border-brand/50 hover:bg-brand-dim sm:p-4"
       whileHover={{ 
         x: 4,
         transition: { duration: 0.2, ease: "easeOut" }
@@ -211,18 +212,12 @@ function CertificationCard({ cert }: CertificationCardProps) {
 
 export function About() {
   return (
-    <section id="about" className="py-16 sm:py-24 md:py-32 px-10 sm:px-14 md:px-6 border-t border-border">
-      <div className="max-w-6xl mx-auto">
+    <section id="about" className="border-t border-border py-24 sm:py-32 md:py-40">
+      <div className="mx-auto max-w-[1600px] px-6 sm:px-10 md:px-16 lg:px-24">
         <div className="grid md:grid-cols-12 gap-12 md:gap-16">
           {/* Label */}
           <div className="md:col-span-3">
-            <Reveal
-              as="p"
-              y={8}
-              className="text-sm font-mono tracking-widest text-muted-foreground uppercase sticky top-24"
-            >
-              About
-            </Reveal>
+            <SectionLabel index="01" title="About" kana="ケイレキ" />
           </div>
 
           {/* Content */}

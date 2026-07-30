@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "./reveal";
+import { SectionLabel } from "./section-label";
 import { TextReveal } from "./text-reveal";
 
 export function Contact() {
@@ -17,19 +18,13 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-16 sm:py-24 md:py-32 px-10 sm:px-14 md:px-6 bg-foreground text-background"
+      className="bg-foreground py-24 text-background sm:py-32 md:py-40"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="mx-auto max-w-[1600px] px-6 sm:px-10 md:px-16 lg:px-24">
         <div className="grid md:grid-cols-12 gap-12 md:gap-16">
           {/* Label */}
           <div className="md:col-span-3">
-            <Reveal
-              as="p"
-              y={8}
-              className="text-sm font-mono tracking-widest text-background/50 uppercase sticky top-24"
-            >
-              Contact
-            </Reveal>
+            <SectionLabel index="04" title="Contact" kana="レンラク" inverted />
           </div>
 
           {/* Content */}
@@ -48,7 +43,7 @@ export function Contact() {
                 href="https://wa.me/51982104435"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-3 px-6 py-3 bg-secondary/20 hover:bg-secondary/40 text-foreground transition-colors"
+                className="group inline-flex items-center gap-3 border border-brand bg-brand px-6 py-3 font-mono text-background transition-colors hover:bg-transparent hover:text-brand"
               >
                 <svg
                   viewBox="0 0 32 32"
@@ -64,7 +59,7 @@ export function Contact() {
 
               <button
                 onClick={() => setShowModal(true)}
-                className="group inline-flex items-center gap-3 px-6 py-3 bg-secondary/20 hover:bg-secondary/40 text-foreground transition-colors"
+                className="group inline-flex items-center gap-3 border border-background/30 px-6 py-3 font-mono text-background transition-colors hover:border-background"
                 aria-label="Contact by email"
               >
                 <svg

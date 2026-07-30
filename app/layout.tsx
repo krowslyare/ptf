@@ -1,6 +1,7 @@
 import React from "react"
 import type { Metadata } from 'next'
-import { IBM_Plex_Sans, IBM_Plex_Mono, Playfair_Display } from 'next/font/google'
+import { IBM_Plex_Sans, IBM_Plex_Mono, Zen_Old_Mincho } from 'next/font/google'
+import { SmoothScroll } from '@/components/portfolio/smooth-scroll'
 import { Analytics } from '@vercel/analytics/next'
 import { ThemeProvider } from 'next-themes'
 import './globals.css'
@@ -15,10 +16,14 @@ const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"]
 });
+// Loaded for its @font-face side effect: globals.css references the family by
+// name. next/font exposes no japanese subset for any family in this version, so
+// the kana motif falls back to a system mincho — and is glyph-checked at
+// runtime rather than risking tofu boxes. See components/portfolio/kana.tsx.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const playfairDisplay = Playfair_Display({ 
+const zenOldMincho = Zen_Old_Mincho({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"]
+  weight: ["400", "600", "700", "900"]
 });
 
 export const metadata: Metadata = {
@@ -53,6 +58,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange={false}
         >
+          <SmoothScroll />
           {children}
         </ThemeProvider>
         <Analytics />
