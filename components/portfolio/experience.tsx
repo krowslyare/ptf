@@ -78,26 +78,25 @@ const experienceSections = [
           {
             title: "Full-Stack Developer",
             tasks: [
-              "Design and delivery of multi-tenant web systems on Next.js and Supabase: data model, authentication, roles, and tenant isolation enforced through PostgreSQL Row Level Security.",
+              "Design and delivery of multi-tenant web systems on Next.js and Supabase: clean domain-driven architecture, authentication, role-based access, and strict tenant isolation enforced through PostgreSQL Row Level Security.",
               "Inventory ERP for a mining contractor: transactional kardex computed atomically in the database, multi-warehouse stock, and Excel import/export.",
               "Architecture organized by business domain, keeping domain rules independent from framework and UI so modules can be added without touching the rest.",
               "Automated testing with Playwright and Vitest, plus Sentry monitoring, as a gate before every production deploy.",
             ],
           },
           {
-            title: "Web Developer",
+            title: "Web & Systems Developer",
             tasks: [
-              "Corporate sites and storefronts built for SEO and conversion, with copy and data centralized so clients can update content without touching components.",
+              "Production-ready commercial web platforms built for SEO and conversion, with copy and data centralized so clients can update content through an admin portal.",
               "End-to-end project ownership: domain registration, DNS, hosting, deployment pipelines, analytics, and ongoing maintenance.",
               <>
-                Peruvian regulatory compliance across client sites: the
-                mandatory complaints book (
+                Turnkey Peruvian regulatory compliance across client systems: automated complaints book (
                 <em lang="es" className="italic">
                   Libro de Reclamaciones
                 </em>
-                ), privacy policy, and terms of service.
+                ) API, privacy policies, and INDECOPI legal standards.
               </>,
-              "Lead capture and WhatsApp-based checkout flows, matching how the clients were already selling.",
+              "Lead capture pipelines with real-time attribution and WhatsApp-based checkout flows matching client business operations.",
             ],
           },
         ],

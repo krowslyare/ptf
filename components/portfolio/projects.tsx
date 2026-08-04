@@ -41,9 +41,9 @@ const enterpriseProjects = [
 const clientProjects = [
   {
     title: "Kurogrid Portal",
-    subtitle: "Multi-tenant client portal · Next.js + Supabase",
+    subtitle: "Multi-Tenant B2B Admin & Client Portal · Next.js + Supabase",
     description:
-      "The operational backbone of the studio: clients handle billing, support requests and web metrics in one place, while the team runs everything from an admin panel. Organized as sixteen domain modules — billing, analytics, site health, complaints book, change requests, leads, reports, internal finance — each split into pure domain logic, server access, and UI. Tenant isolation enforced in PostgreSQL with Row Level Security; Playwright smoke tests gate every deploy.",
+      "The operational backbone for clients and studio management: centralizes web analytics, lead pipelines, support requests, and financial reporting in a single multi-tenant dashboard. Built on a clean architecture across sixteen domain modules — billing, site health, complaints book API, lead routing, internal finance — isolating domain rules, server access, and UI layers. Strict tenant data isolation enforced at the database level via PostgreSQL Row Level Security (RLS), with automated Playwright smoke testing and Sentry telemetry gating production deploys.",
     technologies: [
       "Next.js 16",
       "TypeScript",
@@ -58,9 +58,9 @@ const clientProjects = [
   },
   {
     title: "Kurogrid",
-    subtitle: "Studio site · Next.js",
+    subtitle: "Regulated Web Platform & Studio Engine · Next.js",
     description:
-      "Public site for the studio: service pages, MDX-driven blog, and interactive product demos built with React Three Fiber. Leads are captured into Supabase with UTM attribution carried through to the portal, and a per-tenant complaints book API serves the client sites that need one.",
+      "Public commercial platform and service engine for the studio. More than static landing pages, it delivers production-ready web infrastructure with native Peruvian regulatory compliance (integrated Libro de Reclamaciones API and legal data terms), real-time lead capture with UTM attribution piped directly to the admin portal, and interactive product demos.",
     technologies: [
       "Next.js",
       "TypeScript",
