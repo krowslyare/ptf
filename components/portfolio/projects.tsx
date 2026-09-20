@@ -126,7 +126,6 @@ const clientProjects = [
       "Firebase Auth",
       "Leaflet",
     ],
-    github: "https://github.com/krowslyare/ezcuadro_portal",
     demo: "https://portal.ezcuadro.com",
   },
   {
@@ -135,7 +134,8 @@ const clientProjects = [
     description:
       "Site for a mining contractor registered with Peru's Ministry of Energy and Mines. Service and capability pages aimed at procurement teams evaluating suppliers, with contact routing as the single conversion goal.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Lenis"],
-    demo: "https://smva.com.pe",
+    demo: "https://smva.preview.kurogrid.com/",
+    status: "In progress",
   },
   {
     title: "Pokorb",
@@ -179,6 +179,7 @@ type Project = {
   github?: string;
   demo?: string;
   confidential?: boolean;
+  status?: string;
 };
 
 const projectGroups: {
@@ -219,9 +220,17 @@ function ProjectCard({ project, index }: ProjectCardProps) {
     >
       <div className="mb-5 flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <h3 className="font-serif text-2xl leading-tight md:text-3xl">
-            {project.title}
-          </h3>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <h3 className="font-serif text-2xl leading-tight md:text-3xl">
+              {project.title}
+            </h3>
+            {project.status && (
+              <span className="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-wider uppercase px-2 py-0.5 rounded border border-brand/30 bg-brand/10 text-brand">
+                <span className="h-1 w-1 rounded-full bg-brand animate-pulse" />
+                {project.status}
+              </span>
+            )}
+          </div>
           <p className="mt-2 font-mono text-xs text-muted-foreground sm:text-sm">
             {project.subtitle}
           </p>

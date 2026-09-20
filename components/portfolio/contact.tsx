@@ -99,11 +99,12 @@ export function Contact() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-md bg-zinc-900 border border-white/10 p-8 shadow-2xl"
+              className="relative w-full max-w-md bg-card border border-border p-8 shadow-2xl"
             >
               <button
                 onClick={() => setShowModal(false)}
-                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
+                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Close modal"
               >
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor">
                   <path d="M1 1L11 11M1 11L11 1" strokeWidth="1.5" strokeLinecap="round"/>
@@ -116,17 +117,18 @@ export function Contact() {
                   <p className="text-sm text-muted-foreground">Copy my address or send me an email directly.</p>
                 </div>
                 
-                <div className="flex items-center gap-2 p-3 bg-white/5 rounded border border-white/10">
+                <div className="flex items-center gap-2 p-3 bg-secondary/50 rounded border border-border">
                   <code className="flex-1 font-mono text-sm text-foreground/80">
                     htoyama.dev@gmail.com
                   </code>
                   <button
                     onClick={handleCopy}
-                    className="p-2 hover:bg-white/5 rounded transition-colors text-muted-foreground hover:text-foreground relative"
+                    className="p-2 hover:bg-secondary rounded transition-colors text-muted-foreground hover:text-foreground relative"
                     title="Copy email"
+                    aria-label="Copy email address"
                   >
                     {copied ? (
-                      <span className="text-emerald-500">
+                      <span className="text-emerald-600 dark:text-emerald-400">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                           <path d="M20 6L9 17L4 12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>

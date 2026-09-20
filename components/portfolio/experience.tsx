@@ -62,7 +62,7 @@ const experienceSections = [
           },
           {
             name: "SMVA",
-            href: "https://smva.com.pe",
+            href: "https://smva.preview.kurogrid.com/",
             logo: "/smva.png",
             // white line art: flip it so it reads on the light theme
             imgClass: "invert dark:invert-0",
@@ -105,6 +105,7 @@ const experienceSections = [
   },
   {
     title: "Operations",
+    note: "Not engineering, just a 2-year side quest surviving automotive assembly lines in Japan to pay the bills.",
     experiences: [
       {
         company: "Aisin Seiki",
@@ -261,7 +262,7 @@ export function Experience() {
           <div className="md:col-span-9 space-y-24">
             {experienceSections.map((section) => (
               <div key={section.title} className="relative">
-                <div className="flex items-center gap-6 mb-12">
+                <div className={`flex items-center gap-6 ${'note' in section && section.note ? 'mb-6' : 'mb-12'}`}>
                   <div className="flex items-center gap-3">
                     <span className="h-1.5 w-1.5 rounded-full bg-brand" />
                     <h2 className="font-mono text-sm tracking-[0.2em] uppercase text-muted-foreground">
@@ -270,6 +271,12 @@ export function Experience() {
                   </div>
                   <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
                 </div>
+
+                {'note' in section && section.note && (
+                  <p className="text-sm font-mono text-muted-foreground -mt-2 mb-10 max-w-2xl leading-relaxed">
+                    {section.note}
+                  </p>
+                )}
                 
                 <div className="space-y-16">
                   {section.experiences.map((exp) => (
