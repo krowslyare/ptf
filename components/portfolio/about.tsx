@@ -15,9 +15,6 @@ const skills = {
   ],
   aiAssisted: [
     "Agentic Coding (Claude Code, Cursor, Codex)",
-    "Prompt Engineering",
-    "Context Management",
-    "Cost Optimization",
     "MCP"
   ],
   webBackend: [
@@ -34,7 +31,6 @@ const skills = {
     "Supabase",
     "Row Level Security",
     "Firebase",
-    "Data Modeling",
     "SQL Migrations"
   ],
   cloudData: [
@@ -98,7 +94,7 @@ function SkillsSection() {
   return (
     <div className="space-y-8">
       <TextReveal
-        text="Skills"
+        text="Tools I work with"
         className="font-serif text-2xl"
         as="h3"
       />
@@ -147,19 +143,17 @@ function SkillRow({ name, items }: SkillRowProps) {
 
 function CertificationsSection() {
   return (
-    <div className="space-y-6">
-      <TextReveal
-        text="Certifications"
-        className="font-serif text-2xl"
-        as="h3"
-      />
+    <details className="space-y-6">
+      <summary className="cursor-pointer font-serif text-lg text-muted-foreground hover:text-foreground">
+        Certifications
+      </summary>
 
       <Stagger className="space-y-4" stagger={0.08}>
         {certifications.map((cert) => (
           <CertificationCard key={cert.name} cert={cert} />
         ))}
       </Stagger>
-    </div>
+    </details>
   );
 }
 
@@ -223,11 +217,11 @@ export function About() {
             {/* Bio */}
             <div className="space-y-4 sm:space-y-6">
               <ParagraphReveal
-                text="I work across backend, frontend, data, and infrastructure. In practice that means I usually end up owning a project from the database schema up to the domain it runs on."
+                text="Most of my work is for businesses here in Peru. Sometimes it’s a website, sometimes it’s the internal tool behind it. I tend to work on both."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
               <ParagraphReveal
-                text="At EY I worked on ETL pipelines and financial data analysis for forensic audits, and contributed role management to an internal Spring Boot service. On my own I build and maintain web systems for businesses in Peru: a multi-tenant client portal, an inventory ERP for a mining contractor, and the sites in front of them."
+                text="Before that, I worked with financial data and internal software at EY. These days I build and maintain projects through Kurogrid."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
               <ParagraphReveal
@@ -235,7 +229,7 @@ export function About() {
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
               <ParagraphReveal
-                text="My family is in Japan and I hold permanent residency there. During the pandemic I paused my degree and spent 2021 and 2022 on the line at two auto parts plants in Aichi. Not engineering, but it explains the gap in the timeline, and it is why I can work in Japan without paperwork."
+                text="My family is in Japan. During the pandemic I paused university and spent 2021 and 2022 working at auto parts plants in Aichi. That’s the factory chapter further down."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
 
@@ -259,6 +253,8 @@ export function About() {
                 </div>
               </Reveal>
             </div>
+
+            <p className="text-sm text-muted-foreground">Based in Lima. Permanent resident of Japan.</p>
 
             {/* Skills */}
             <SkillsSection />

@@ -7,7 +7,7 @@ import { SectionLabel } from "./section-label";
 
 const experienceSections = [
   {
-    title: "Professional",
+    title: "EY",
     experiences: [
       {
         company: "Ernst & Young (EY)",
@@ -18,14 +18,14 @@ const experienceSections = [
             title: "Data Analyst / Data Engineer",
             level: "Staff",
             tasks: [
-              "Processing, transformation, and analysis of financial data (ETL) for forensic audits and anomaly detection.",
-              "Preparation and validation of datasets for Data Engineering pipelines and analytical consumption.",
+              "I worked with financial data for forensic audits, cleaning and transforming datasets and checking them before they went into analysis.",
+              "I also prepared and validated the datasets that fed the team’s data pipelines.",
             ],
           },
           {
             title: "Software Development",
             tasks: [
-              "Role management on an internal Spring Boot microservice: implementation at the API layer and verification that authorization behaved correctly per role.",
+              "On an internal Spring Boot service, my part was role management. I implemented the API changes and checked what each role could access.",
             ],
           },
         ],
@@ -78,25 +78,25 @@ const experienceSections = [
           {
             title: "Full-Stack Developer",
             tasks: [
-              "Design and delivery of multi-tenant web systems on Next.js and Supabase: clean domain-driven architecture, authentication, role-based access, and strict tenant isolation enforced through PostgreSQL Row Level Security.",
-              "Inventory ERP for a mining contractor: transactional kardex computed atomically in the database, multi-warehouse stock, and Excel import/export.",
-              "Architecture organized by business domain, keeping domain rules independent from framework and UI so modules can be added without touching the rest.",
-              "Automated testing with Playwright and Vitest, plus Sentry monitoring, as a gate before every production deploy.",
+              "I build client portals with Next.js and Supabase. Each client has their own workspace, with access rules enforced in the database.",
+              "For a mining contractor, I built an inventory system with stock movements and costs calculated in the database, plus Excel import and export.",
+              "I keep business rules separate from the interface so a change to a screen doesn’t mean rewriting how the system works.",
+              "I use Playwright and Vitest to check changes before deploying, and Sentry to keep track of errors afterward.",
             ],
           },
           {
             title: "Web & Systems Developer",
             tasks: [
-              "Production-ready commercial web platforms built for SEO and conversion, with copy and data centralized so clients can update content through an admin portal.",
-              "End-to-end project ownership: domain registration, DNS, hosting, deployment pipelines, analytics, and ongoing maintenance.",
+              "I also build the public websites, with content clients can update through an admin portal.",
+              "I handle the domain, DNS, hosting, deploys, and maintenance too. Those are part of the job.",
               <>
-                Turnkey Peruvian regulatory compliance across client systems: automated complaints book (
+                For businesses in Peru, I also set up the complaints book (
                 <em lang="es" className="italic">
                   Libro de Reclamaciones
                 </em>
-                ) API, privacy policies, and INDECOPI legal standards.
+                ) and privacy policy pages.
               </>,
-              "Lead capture pipelines with real-time attribution and WhatsApp-based checkout flows matching client business operations.",
+              "Enquiries go into the client’s portal with their source attached. For businesses that sell over WhatsApp, checkout goes there too.",
             ],
           },
         ],
@@ -116,7 +116,7 @@ const experienceSections = [
           {
             title: "Machinery Operator & Quality Control",
             tasks: [
-              "Operation of industrial machinery and quality control execution under production standards.",
+              "I operated machinery and checked parts at Aisin’s die-casting plant.",
             ],
           },
         ],
@@ -130,7 +130,7 @@ const experienceSections = [
           {
             title: "Assembly Line Operator",
             tasks: [
-              "Automotive seat assembly and basic quality verification on production line under industrial standards.",
+              "I assembled car seats and checked them on the line at Toyota.",
             ],
           },
         ],
@@ -239,7 +239,7 @@ function RoleItem({ role }: RoleItemProps) {
             key={i}
             className="text-muted-foreground leading-relaxed flex gap-3"
           >
-            <span className="text-foreground/30 mt-1.5">—</span>
+            <span aria-hidden="true" className="text-foreground/30 mt-1.5">·</span>
             <span>{task}</span>
           </li>
         ))}
@@ -255,7 +255,7 @@ export function Experience() {
         <div className="grid md:grid-cols-12 gap-12 md:gap-16">
           {/* Label */}
           <div className="md:col-span-3">
-            <SectionLabel index="02" title="Experience" kana="ショクレキ" />
+            <SectionLabel index="03" title="Experience" kana="ショクレキ" />
           </div>
 
           {/* Content */}
@@ -277,7 +277,7 @@ export function Experience() {
                     {section.note}
                   </p>
                 )}
-                
+
                 <div className="space-y-16">
                   {section.experiences.map((exp) => (
                     <ExperienceCard key={exp.company} exp={exp} />

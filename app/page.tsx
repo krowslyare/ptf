@@ -14,8 +14,8 @@ export default function Home() {
       <Hero />
       <TracingBeam>
         <About />
-        <Experience />
         <Projects />
+        <Experience />
       </TracingBeam>
       <Contact />
       <Footer />

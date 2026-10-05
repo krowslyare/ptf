@@ -8,7 +8,7 @@ const enterpriseProjects = [
     title: "Data Engineering Pipeline",
     subtitle: "Azure Dataflow Gen2",
     description:
-      "Data pipeline for ingestion and transformation of orders stored in Azure Data Lake. ETL orchestration with Dataflow Gen2, replicating Alteryx-style processes required by the client.",
+      "I worked on a pipeline that reads order data from Azure Data Lake and transforms it with Dataflow Gen2. The client needed it to reproduce processes they were using in Alteryx.",
     technologies: [
       "Azure Data Lake",
       "Microsoft Fabric Dataflow Gen2",
@@ -20,14 +20,14 @@ const enterpriseProjects = [
     title: "Data Flow Modernization",
     subtitle: "Databricks",
     description:
-      "Migration of legacy data flows to Databricks notebooks using PySpark, and orchestration of the resulting processes through Databricks Jobs. Involved in design, testing, and rollout.",
+      "I helped move existing data flows into PySpark notebooks and schedule them with Databricks Jobs. My work covered design, testing, and rollout.",
     technologies: ["Databricks", "PySpark", "Databricks Jobs"],
   },
   {
     title: "User Management Microservice",
     subtitle: "Azure · contributor",
     description:
-      "Internal Java/Spring Boot service for users, roles and permissions, built by a team I contributed to. My part was role management: implementing it at the API layer and verifying that the authorization checks behaved correctly for each role.",
+      "A Spring Boot service for users, roles, and permissions, built with a team at EY. I worked on role management in the API and checked that each role could access only what it should.",
     technologies: [
       "Java",
       "Spring Boot",
@@ -41,9 +41,9 @@ const enterpriseProjects = [
 const clientProjects = [
   {
     title: "Kurogrid Portal",
-    subtitle: "Multi-Tenant B2B Admin & Client Portal · Next.js + Supabase",
+    subtitle: "Client and studio portal · Next.js + Supabase",
     description:
-      "The operational backbone for clients and studio management: centralizes web analytics, lead pipelines, support requests, and financial reporting in a single multi-tenant dashboard. Built on a clean architecture across sixteen domain modules — billing, site health, complaints book API, lead routing, internal finance — isolating domain rules, server access, and UI layers. Strict tenant data isolation enforced at the database level via PostgreSQL Row Level Security (RLS), with automated Playwright smoke testing and Sentry telemetry gating production deploys.",
+      "I built this to manage Kurogrid and give clients a place to check their site’s analytics, leads, invoices, and support requests. Each client gets their own workspace, with access rules enforced in the database.",
     technologies: [
       "Next.js 16",
       "TypeScript",
@@ -58,9 +58,9 @@ const clientProjects = [
   },
   {
     title: "Kurogrid",
-    subtitle: "Regulated Web Platform & Studio Engine · Next.js",
+    subtitle: "Studio website · Next.js",
     description:
-      "Public commercial platform and service engine for the studio. More than static landing pages, it delivers production-ready web infrastructure with native Peruvian regulatory compliance (integrated Libro de Reclamaciones API and legal data terms), real-time lead capture with UTM attribution piped directly to the admin portal, and interactive product demos.",
+      "The public site for Kurogrid, where I show the work and explain the services. Enquiries go into the portal with their source attached, and there are a few interactive demos to try.",
     technologies: [
       "Next.js",
       "TypeScript",
@@ -74,9 +74,9 @@ const clientProjects = [
   },
   {
     title: "VRD Inventory ERP",
-    subtitle: "Industrial B2B system · Next.js + Supabase",
+    subtitle: "Inventory system · Next.js + Supabase",
     description:
-      "Inventory and logistics system for a mining contractor. Multi-warehouse stock with a transactional kardex: balances and costs are computed atomically in the database, so concurrent movements can't drift. Built around fast data entry — dense tables, keyboard-first flows, Excel import and export — over 80 SQL migrations and roles hardened with RLS.",
+      "An inventory system I built for a mining contractor. Stock movements and costs are calculated together in the database to keep balances consistent. I focused on quick data entry: dense tables, keyboard shortcuts, and Excel import and export. The live version uses one warehouse; support for multiple warehouses is still in development.",
     technologies: [
       "Next.js",
       "Supabase",
@@ -94,7 +94,7 @@ const clientProjects = [
     title: "VRD Corporate Site",
     subtitle: "Static site · Next.js 16",
     description:
-      "Institutional site for the same contractor, deployed separately from the ERP so neither can take the other down. Fully static for SEO, with every text, service, KPI and image centralized in a single content file the client's team can edit without touching components.",
+      "The public website for the same contractor. It deploys separately from the inventory system, so I can update one without redeploying the other. Text and images live in a single content file rather than being scattered through components.",
     technologies: ["Next.js 16", "React 19", "Tailwind v4", "GSAP", "Three.js"],
     demo: "https://vrdmincon.com.pe",
   },
@@ -102,7 +102,7 @@ const clientProjects = [
     title: "Ezcuadro",
     subtitle: "Custom canvas prints · Next.js + Firebase",
     description:
-      "Storefront for a made-to-order canvas printing business in Lima. Quote builder with real-time size and price comparison, filterable catalog, blog, and a Peruvian complaints book for regulatory compliance. Orders close over WhatsApp, which is how the business already sold.",
+      "A storefront I built for a canvas printing business in Lima. Customers can browse the catalog and compare sizes and prices as they put together a quote. Orders close over WhatsApp, which is how the business already sold.",
     technologies: [
       "Next.js",
       "TypeScript",
@@ -117,7 +117,7 @@ const clientProjects = [
     title: "Ezcuadro Backoffice",
     subtitle: "Admin consolidation · Vite + React",
     description:
-      "The store's internal tools had grown into eight isolated pages, each with its own login form and its own diverging CSS — and every admin deploy risked the public site. I pulled them out into a single SPA with one auth provider, role-based route guards, and one set of design tokens. The storefront and the panel now ship independently.",
+      "The store's internal tools had grown into eight isolated pages, each with its own login form and its own diverging CSS, and every admin deploy risked the public site. I pulled them out into a single SPA with one auth provider, role-based route guards, and one set of design tokens. The storefront and the panel now ship independently.",
     technologies: [
       "Vite",
       "React",
@@ -132,7 +132,7 @@ const clientProjects = [
     title: "SMVA",
     subtitle: "Corporate landing · Next.js",
     description:
-      "Site for a mining contractor registered with Peru's Ministry of Energy and Mines. Service and capability pages aimed at procurement teams evaluating suppliers, with contact routing as the single conversion goal.",
+      "A site I’m building for a mining contractor. It lays out their services and capabilities so buyers can check what they do and get in touch. Still in progress.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Lenis"],
     demo: "https://smva.preview.kurogrid.com/",
     status: "In progress",
@@ -141,7 +141,7 @@ const clientProjects = [
     title: "Pokorb",
     subtitle: "Catalog commerce · React + WhatsApp",
     description:
-      "Catalog and cart for artisan products where checkout hands off to WhatsApp instead of a payment gateway — the flow the client's customers already used. Includes product filtering, a complaints book, and 3D scene work in the landing.",
+      "A catalog and cart for artisan products. Checkout sends the order to WhatsApp, where the client’s customers already buy. I also worked on product filters and the 3D scene on the landing page.",
     technologies: [
       "React",
       "Three.js",
@@ -155,10 +155,10 @@ const clientProjects = [
 
 const personalProjects = [
   {
-    title: "Self-Hosted Cloud Infrastructure",
+    title: "My self-hosting setup",
     subtitle: "Google Cloud Platform",
     description:
-      "Linux VMs on GCP running my own services: firewall rules, SSH access and networking configured by hand, containerized deploys with Docker, Cloud Storage buckets, and a few migrations between environments. Nothing here has users, which is the point: it is where I try the things I would not try first on a client's box.",
+      "My own services running on Linux VMs in GCP, with Docker, storage buckets, and networking I set up myself. Nobody else depends on these, so this is where I try things before putting them on a client’s server.",
     technologies: [
       "GCP Compute Engine",
       "Linux",
@@ -189,14 +189,14 @@ const projectGroups: {
   confidential?: boolean;
 }[] = [
   {
-    title: "Enterprise",
-    blurb: "Delivered inside a consulting firm. Code stays with the client.",
+    title: "At EY",
+    blurb: "Work I contributed to at EY. The code stays with the client.",
     projects: enterpriseProjects,
     confidential: true,
   },
   {
     title: "Client Work",
-    blurb: "Systems I designed, shipped and still maintain. All live in production.",
+    blurb: "Projects I build and maintain for clients. SMVA is still in progress.",
     projects: clientProjects,
   },
   {
@@ -330,7 +330,7 @@ export function Projects() {
         <div className="grid md:grid-cols-12 gap-12 md:gap-16">
           {/* Label */}
           <div className="md:col-span-3">
-            <SectionLabel index="03" title="Projects" kana="サクヒン" />
+            <SectionLabel index="02" title="Projects" kana="サクヒン" />
           </div>
 
           {/* Content */}

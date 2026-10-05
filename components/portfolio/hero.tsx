@@ -128,33 +128,14 @@ export function Hero() {
                 transition={{ duration: 0.9, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
               />
 
-              <div className="mt-8 grid gap-8 md:grid-cols-[1.4fr_1fr] md:gap-16">
+              <div className="mt-8">
                 <p className="max-w-xl text-balance text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg">
                   {stage >= 1 && (
-                    <WordFade text="I build web systems end to end — database, app, deploy, maintenance. Client portals, an inventory ERP, and data pipelines. All in production." />
+                    <WordFade text="I’m Hideki, a developer in Lima. I build websites and the systems behind them for businesses here in Peru. I’m usually the one setting up the database, deploying the app, and keeping it running afterward." />
                   )}
                 </p>
 
-                {/* Counter rail */}
-                <motion.dl
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: stage >= 1 ? 1 : 0 }}
-                  transition={{ duration: 0.5, delay: 0.25 }}
-                  className="flex gap-8 self-start border-l border-border pl-6 font-mono md:gap-10"
-                >
-                  <div>
-                    <dt className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                      Live systems
-                    </dt>
-                    <dd className="mt-1 text-2xl text-brand">08</dd>
-                  </div>
-                  <div>
-                    <dt className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                      Certs
-                    </dt>
-                    <dd className="mt-1 text-2xl">05</dd>
-                  </div>
-                </motion.dl>
+
               </div>
             </div>
 
@@ -186,13 +167,13 @@ export function Hero() {
               href="#projects"
               className="group relative overflow-hidden border border-brand bg-brand px-6 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-background transition-colors hover:bg-transparent hover:text-brand sm:text-xs"
             >
-              View projects
+              See what I’ve built
             </a>
             <a
               href="#contact"
               className="border border-border px-6 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground transition-colors hover:border-foreground sm:text-xs"
             >
-              Contact
+              Say hi
             </a>
           </div>
 

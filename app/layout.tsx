@@ -28,7 +28,7 @@ const zenOldMincho = Zen_Old_Mincho({
 
 export const metadata: Metadata = {
   title: 'Hideki Toyama | Software Engineer',
-  description: 'Software engineer based in Lima, Peru. I build web systems end to end: client portals, inventory ERPs, and data pipelines running in production.',
+  description: 'I’m Hideki, a developer in Lima. I build websites, client portals, and internal tools for businesses in Peru, and keep them running afterward.',
   icons: {
     icon: [
       {

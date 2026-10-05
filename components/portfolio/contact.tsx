@@ -31,7 +31,7 @@ export function Contact() {
           <div className="md:col-span-9">
             <div className="mb-12">
               <TextReveal
-                text="Have a project in mind or a job opportunity? Let's talk."
+                text="Want to work together, ask about something I built, or just say hi? Send me a message."
                 className="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight"
                 as="h2"
               />
