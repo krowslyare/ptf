@@ -1,6 +1,11 @@
 # Portfolio - Hideki Toyama
 
-Software engineer portfolio built with Next.js, React, Tailwind CSS, and Framer Motion.
+My personal portfolio: a place to explore selected projects, what I worked on,
+and some of the decisions behind them.
+
+**[Visit the portfolio](https://hidekitoyama.site)**
+
+Built with Next.js, React, Tailwind CSS, and Framer Motion.
 
 ## Tech Stack
 
