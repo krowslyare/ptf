@@ -67,12 +67,6 @@ const experienceSections = [
             // white line art: flip it so it reads on the light theme
             imgClass: "invert dark:invert-0",
           },
-          {
-            name: "Pokorb",
-            href: "https://pokorb.com",
-            logo: "/pokorb.png",
-            imgClass: "",
-          },
         ],
         roles: [
           {
@@ -188,7 +182,7 @@ function ExperienceCard({ exp }: ExperienceCardProps) {
                   href={project.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative w-24 h-14 flex items-center justify-center rounded bg-secondary/10 hover:bg-secondary/20 border border-white/5 hover:border-white/10 transition-all duration-300"
+                  className="group relative w-24 h-14 flex items-center justify-center rounded bg-secondary/10 hover:bg-secondary/20 border border-border hover:border-brand/40 transition-all duration-300"
                   title={`Visit ${project.name}`}
                 >
                   {project.logo ? (

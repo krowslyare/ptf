@@ -131,7 +131,7 @@ export function Hero() {
               <div className="mt-8">
                 <p className="max-w-xl text-balance text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg">
                   {stage >= 1 && (
-                    <WordFade text="I’m Hideki, a developer in Lima. I build websites and the systems behind them for businesses here in Peru. I’m usually the one setting up the database, deploying the app, and keeping it running afterward." />
+                    <WordFade text="I’m Hideki, a developer based in Lima, with one foot in Japan. I build websites and the systems behind them for businesses here in Peru. I’m usually the one setting up the database, deploying the app, and keeping it running afterward." />
                   )}
                 </p>
 

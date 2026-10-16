@@ -217,7 +217,7 @@ export function About() {
             {/* Bio */}
             <div className="space-y-4 sm:space-y-6">
               <ParagraphReveal
-                text="Most of my work is for businesses here in Peru. Sometimes it’s a website, sometimes it’s the internal tool behind it. I tend to work on both."
+                text="Most of my clients are small and mid-sized businesses that need the website and the internal tool to talk to each other. I build both."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
               <ParagraphReveal
@@ -225,7 +225,7 @@ export function About() {
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
               <ParagraphReveal
-                text="Most of what I know about production I learned self-hosting: VMs, containers, DNS, backups, and the migrations that go wrong at 2am."
+                text="I also self-host my own stuff, which is where I learned VMs, containers, DNS, backups, and the migrations that go wrong at 2am."
                 className="text-base sm:text-lg text-muted-foreground leading-relaxed"
               />
               <ParagraphReveal
@@ -254,7 +254,7 @@ export function About() {
               </Reveal>
             </div>
 
-            <p className="text-sm text-muted-foreground">Based in Lima. Permanent resident of Japan.</p>
+            <p className="text-sm text-muted-foreground">Based in Lima, permanent resident of Japan. I split my time between the two.</p>
 
             {/* Skills */}
             <SkillsSection />
